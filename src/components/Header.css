@@ -1,0 +1,10 @@
+.navbar {
+    padding: 20px 140px;
+}
+#reseachInput {
+    width: 300px;
+    border-radius: 20px;
+}
+#searchBtn {
+    border-radius: 20px;
+}
