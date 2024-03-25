@@ -1,0 +1,107 @@
+.DetailSection {
+  display: flex;
+  justify-content: center;
+}
+.product-box {
+  display: flex;
+}
+.product-img-detail {
+  width: 500px;
+  height: 500px;
+}
+.left-box {
+  display: flex;
+  width: 580px;
+}
+.img-selector-box {
+}
+.img-selector {
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+}
+.img-selector:hover {
+  border: rgb(15, 99, 233) 1px solid;
+  border-radius: 10%;
+}
+.right-box {
+  padding: 5px;
+}
+.brand-products-detail {
+  color: rgb(15, 99, 233);
+}
+
+.price-products-detail {
+  display: flex;
+  align-items: center;
+}
+.discount-price-products-detail {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 7px;
+  margin-right: 8px;
+}
+.discount-text {
+  color: red;
+}
+.quantity-box {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.quantity-button-box {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  outline: #d4d4d4 1px solid;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.quantity {
+  border: none;
+  width: 40px;
+  text-align: center;
+}
+.quantity:focus {
+  outline: none;
+}
+.quantity-button {
+  border: none;
+  width: 30px;
+  height: 30px;
+}
+.buy-button-box {
+  display: flex;
+  margin-top: 40px;
+}
+.buy-button {
+  background-color: rgb(15, 99, 233, 0.15);
+  color: rgb(15, 99, 233);
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.incart-button {
+  background-color: rgb(15, 99, 233);
+  color: white;
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+.detail-box {
+  margin-top: 20px;
+}
+.spac-box {
+  margin-top: 40px;
+}
+td {
+  text-align: left;
+  padding: 10px 12px;
+}
+tr:nth-child(even) {
+  background-color: rgb(15, 99, 233, 0.15);
+}

@@ -1,0 +1,55 @@
+.sectionFooter {
+  overflow: hidden;
+}
+
+.text-scrolling {
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 150px;
+  color: rgb(15, 99, 233);
+}
+
+.scrolling-text {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: scrollText1 20s linear infinite;
+}
+
+@keyframes scrollText1 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.footer-item-1 {
+  background-color: rgb(15, 99, 233);
+  color: white;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  gap: 50px;
+}
+.footer-item-1-1 {
+  display: flex;
+  align-items: center;
+}
+
+.footer-item-2 {
+  background-color: rgb(233, 233, 233);
+  color: black;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  gap: 50px;
+}
+.socialMediaBox {
+  display: flex;
+}
+.socialMediaLogo {
+  width: 30px;
+  height: 30px;
+}

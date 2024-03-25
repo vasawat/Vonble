@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap");
+.bestProductBox {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.number {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: "Readex Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "HEXP" 0;
+}
+.number1 {
+}
+.number2 {
+  margin-top: 40px;
+}
+.number3 {
+  margin-top: 40px;
+}
+.number4 {
+  margin-top: 80px;
+}
+.number5 {
+  margin-top: 80px;
+}

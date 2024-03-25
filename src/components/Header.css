@@ -1,10 +1,127 @@
 .navbar {
-    padding: 20px 140px;
+  padding: 40px 140px;
+  transition: all 0.55s;
+}
+.navbar-brand {
+  font-size: 35px;
+}
+.nav-item {
+  cursor: pointer;
+}
+.gap-3 {
+  gap: 0;
+}
+.dropdown-toggle::after {
+  display: none;
 }
 #reseachInput {
-    width: 300px;
-    border-radius: 20px;
+  width: 300px;
+  border-radius: 20px;
 }
 #searchBtn {
-    border-radius: 20px;
+  border-radius: 20px;
+}
+.loginModal {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: auto;
+  height: 630px;
+}
+.loginTypeBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 10px;
+  width: 280px;
+  height: 50px;
+  outline: rgb(198, 197, 197) 1px solid;
+  border-radius: 20px;
+}
+.loginTypeEmailBox {
+  display: block;
+  padding: 0;
+  height: 90px;
+  border-radius: 20px 20px 0 0;
+}
+.loginRegisbuttonBox {
+  position: absolute;
+  bottom: 0;
+  width: 280px;
+  display: flex;
+}
+.loginRegisbutton {
+  width: 50%;
+  height: 40px;
+  color: white;
+  background-color: rgb(15, 99, 233);
+  border: none;
+}
+.loginRegisbuttonSelect {
+  width: 50%;
+  height: 40px;
+  color: white;
+  background-color: rgb(15, 99, 233, 0.8);
+  border: none;
+}
+.loginRegisText {
+  margin: 8px 0;
+}
+.loginTypeIcon {
+  width: 30px;
+  height: 30px;
+  margin: 0 25px;
+}
+.requiredInput {
+  border-color: #ea4141; /* Bootstrap danger color */
+  box-shadow: 0 0 0 0.2rem rgba(233, 38, 38, 0.25);
+}
+.requiredInput:focus {
+  border-color: #ea4141; /* Bootstrap danger color */
+  box-shadow: 0 0 0 0.2rem rgba(233, 38, 38, 0.25);
+}
+.inputBox {
+  margin-top: 10px;
+  display: block;
+  align-items: center;
+  padding: 0 10px;
+  width: 280px;
+  height: 80px;
+  outline: rgb(198, 197, 197) 1px solid;
+  border-radius: 20px;
+}
+.loginInputBox {
+  margin-top: 15px;
+}
+.loginInput {
+  width: 280px;
+}
+.requiredText {
+  margin-bottom: 3px;
+  font-size: 10px;
+  color: red;
+}
+.MyCheckBox {
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+}
+.requiredInputChackBox {
+  color: red;
+  font-size: 13px;
+}
+.loginCheckboxText {
+  color: rgb(100, 100, 100);
+  font-size: 13px;
+}
+.submitButton {
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+  background-color: rgb(15, 99, 233);
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 10px;
 }

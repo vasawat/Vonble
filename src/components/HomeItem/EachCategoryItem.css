@@ -1,0 +1,75 @@
+.SectionCategoryBox {
+  margin: 50px 0;
+  display: block;
+  justify-content: center;
+}
+.allItem-SectionCategoryBox {
+}
+.top-box {
+  display: flex;
+  justify-content: space-between;
+}
+.category-name {
+  font-size: 25px;
+}
+.button-seeAll {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  color: rgb(15, 99, 233);
+  gap: 10px;
+  align-items: center;
+  border-radius: 10px;
+  width: 120px;
+  height: 40px;
+}
+.button-seeAll:hover {
+  background-color: rgb(15, 99, 233, 0.6);
+  color: white;
+  transition: all 0.55s;
+}
+.bottom-box {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.carousel-inner {
+}
+.carousel-box-category {
+  padding: 17px;
+}
+.carousel-item-category {
+  display: flex;
+  gap: 22px;
+}
+.icon-box-size {
+  width: 30px;
+  height: 40px;
+}
+.iconNext-carousel {
+  color: rgb(15, 99, 233);
+  background-color: rgb(15, 99, 233, 0.1);
+}
+.iconPrevious-carousel {
+  color: rgb(15, 99, 233);
+  background-color: rgb(15, 99, 233, 0.1);
+}
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  padding: 0;
+  width: 30px;
+  height: 40px;
+}
+.carousel-control-prev {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  padding: 0;
+  width: 30px;
+  height: 40px;
+}
+.carousel-indicators {
+  display: none;
+}
