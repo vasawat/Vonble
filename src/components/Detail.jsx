@@ -6,13 +6,14 @@ import Swal from "sweetalert2";
 import testimg from "./imgs/testimg.jpg";
 
 export default function Detail() {
-  const { products, Brands, formatMoney, userLogined, handleShow, addToCart } =
+  const { products, Brands, formatMoney, userLogined, handleLoginShow, addToCart } =
     useContext(productContext);
   const { product_id } = useParams();
   const [thisProduct, setThisProduct] = useState({});
   const [thisProductBrand, setThisProductBrand] = useState({});
   const [Spec, setSpec] = useState({});
   const [currentImageProduct, setCurrentImageProduct] = useState();
+  const [quantityCount, setQuantityCount] = useState(1);
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -100,7 +101,6 @@ export default function Detail() {
           <div className="right-box">
             <h2>{thisProduct.name}</h2>
             <p className="brand-products-detail">{thisProductBrand.name}</p>
-            {/* chack format function */}
             <div className="price-products-detail">
               {thisProduct.discount !== undefined &&
               thisProduct.discount !== 0 ? (
@@ -135,14 +135,24 @@ export default function Detail() {
               <div>จํานวน :</div>
 
               <div className="quantity-button-box">
-                <button className="quantity-button">-</button>
-                <input
-                  className="quantity"
-                  type="text"
-                  min="1"
-                  defaultValue="1"
-                />
-                <button className="quantity-button">+</button>
+                <button
+                  className="quantity-button"
+                  onClick={() => {
+                    if (quantityCount <= 1) {
+                    } else {
+                      setQuantityCount(quantityCount - 1);
+                    }
+                  }}
+                >
+                  -
+                </button>
+                <input className="quantity" type="text" value={quantityCount} readOnly/>
+                <button
+                  className="quantity-button"
+                  onClick={() => setQuantityCount(quantityCount + 1)}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className="buy-button-box">
@@ -151,7 +161,7 @@ export default function Detail() {
               ) : (
                 <button
                   onClick={() => {
-                    handleShow();
+                    handleLoginShow();
                   }}
                   className="buy-button"
                 >
@@ -171,7 +181,7 @@ export default function Detail() {
               ) : (
                 <button
                   onClick={() => {
-                    handleShow();
+                    handleLoginShow();
                   }}
                   className="incart-button"
                 >
@@ -189,12 +199,14 @@ export default function Detail() {
           <h3>สเปคสินค้า</h3>
           {Spec.length > 0 ? (
             <table>
+              <tbody>
               {Spec.map(([key, value]) => (
-                <tr>
+                <tr key={key}>
                   <td>{key}</td>
                   <td>{value}</td>
                 </tr>
               ))}
+              </tbody>
             </table>
           ) : null}
         </div>

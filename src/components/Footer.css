@@ -43,8 +43,14 @@
   color: black;
   display: flex;
   justify-content: center;
-  height: 300px;
-  gap: 50px;
+  align-items: center;
+  height: 150px;
+  gap: 100px;
+}
+.logoFooter {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
 }
 .socialMediaBox {
   display: flex;
@@ -52,4 +58,11 @@
 .socialMediaLogo {
   width: 30px;
   height: 30px;
+}
+.footer-item-3 {
+  background-color: rgb(233, 233, 233);
+  color: black;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
 }

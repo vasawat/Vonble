@@ -3,8 +3,11 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { BsCash } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { productContext } from "../contexts/productContext";
 
 export default function Footer() {
+  const { VonbleLogo } = useContext(productContext);
   return (
     <section className="sectionFooter">
       <div className="scrolling-text">
@@ -37,6 +40,15 @@ export default function Footer() {
       </div>
 
       <div className="footer-item-2">
+        <div className="">
+          <img className="logoFooter" src={VonbleLogo} alt="" />
+          <p className="m-0">Vonble คือ project เว็บไซต์</p>
+          <p className="m-0">E-commerce</p>
+        </div>
+        <div className="">
+          <div>สร้างโดย</div>
+          <a href="https://github.com/vasawat">https://github.com/vasawat</a>
+        </div>
         <div className="">
           <div>ติดต่อเรา</div>
           <div className="socialMediaBox">
@@ -85,6 +97,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <div className="footer-item-3">© 2024 Vonble All Rights.</div>
     </section>
   );
 }

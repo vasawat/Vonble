@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 export default function BestSale() {
   const { products } = useContext(productContext);
   return (
-    <section className="SectionBox">
+    <section className="SectionBestSaleBox">
       <div className="allItem-Box">
         <h2 className="text-center">🏆 Best Sale Top 5 🏆</h2>
         <div className="bestProductBox">

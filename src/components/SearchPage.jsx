@@ -3,8 +3,6 @@ import "./SearchPage.css";
 import { useContext, useEffect, useState } from "react";
 import { productContext } from "../contexts/productContext";
 import CardProduct from "./HomeItem/CardProduct";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
 
 export default function SearchPage() {
   const { keywordSearch } = useParams();
@@ -22,13 +20,28 @@ export default function SearchPage() {
   return (
     <section className="searchSection">
       <div className="allItem-Box">
-        <Row>
-          {filterSearch.map((product) => (
-            <Col>
-              <CardProduct key={product.id} product={product} />
-            </Col>
-          ))}
-        </Row>
+        <p className="">Search Result {filterSearch.length} item</p>
+        <section className="filterSection">
+          <div className="filterBox">
+            <p>ตั้งค่าการค้นหา</p>
+            <div>
+              <p>ช่วงราคา</p>
+              <input type="range" />
+            </div>
+            <div>
+              <p>แบรนด์</p>
+              <input type="checkbox" />
+              <label htmlFor="">LG</label>
+            </div>
+          </div>
+          <div className="productBox">
+            <div className="container itembox">
+              {filterSearch.map((product) => (
+                <CardProduct key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   );

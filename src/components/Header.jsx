@@ -25,9 +25,14 @@ export default function Header() {
     setLoginWithEmail,
     ModalRegister,
     setModalRegister,
-    handleClose,
-    handleShow,
+    handleLoginClose,
+    handleLoginShow,
     show,
+    errorInLogin,
+    emailDuplicate,
+    passNotMatch,
+    setUserLoginedCart,
+    setUserLoginedInfo,
   } = useContext(productContext);
   const navigate = useNavigate();
 
@@ -37,29 +42,38 @@ export default function Header() {
   }
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
+    register: Login,
+    handleSubmit: handleSubmitLogin,
+    reset: resetLogin,
+    formState: { errors: errorsLogin },
   } = useForm();
+   const {
+     register: Register,
+     handleSubmit: handleSubmitRegister,
+     reset: resetRegister,
+     formState: { errors: errorsRegister },
+   } = useForm();
 
   function LogOut() {
+    setUserLoginedCart({});
     setUserLogined({});
+    setUserLoginedInfo({});
     navigate("/");
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            },
-          });
-          Toast.fire({
-            icon: "error",
-            title: "Log out successfully",
-          });
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "error",
+      title: "Log out successfully",
+    });
   }
 
   return (
@@ -88,13 +102,16 @@ export default function Header() {
         </form>
 
         <div className="navbar-nav mb-2 mb-lg-0 gap-3">
-          {userLogined ? (
-            <Link to={`/user/${userLogined.email}/${"cart"}`} className="nav-item btn btn-none">
+          {userLogined.email ? (
+            <Link
+              to={`/user/${userLogined.user_id}/cart`}
+              className="nav-item btn btn-none"
+            >
               <AiOutlineShoppingCart size={30} />
             </Link>
           ) : (
             <div className="nav-item btn btn-none">
-              <AiOutlineShoppingCart size={30} />
+              <AiOutlineShoppingCart size={30} onClick={handleLoginShow} />
             </div>
           )}
 
@@ -114,7 +131,7 @@ export default function Header() {
               </Dropdown>
             ) : (
               <div className="btn">
-                <FaRegUserCircle size={30} onClick={handleShow} />
+                <FaRegUserCircle size={30} onClick={handleLoginShow} />
               </div>
             )}
           </div>
@@ -122,7 +139,7 @@ export default function Header() {
       </div>
 
       {loginWithEmail ? (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleLoginClose}>
           <Modal.Body className="loginModal ">
             <div>
               <img className="vonbleLogo mt-3 mb-3" src={VonbleLogo} alt="" />
@@ -169,171 +186,110 @@ export default function Header() {
 
               {ModalRegister ? (
                 <form
-                  onSubmit={handleSubmit((data) => {
-                    UserRegister(data);
-                    handleClose();
+                  onSubmit={handleSubmitRegister((data) => {
+                    UserRegister(data, resetRegister);
                   })}
                 >
-                  {errors.emailRegis ? (
-                    <div className="loginInputBox mt-4 text-start">
-                      {errors.emailRegis && (
-                        <div className="requiredText">* Required Email</div>
-                      )}
-                      <input
-                        className="form-control loginInput requiredInput"
-                        placeholder="Email"
-                        name="email"
-                        {...register("emailRegis", { required: true })}
-                      />
-                    </div>
-                  ) : (
-                    <div className="loginInputBox mt-4 text-start">
-                      <input
-                        className="form-control loginInput"
-                        placeholder="Email"
-                        name="email"
-                        {...register("emailRegis", { required: true })}
-                      />
-                    </div>
-                  )}
+                  <div className="loginInputBox mt-4 text-start">
+                    {emailDuplicate && (
+                      <div className="requiredText">* Email already exists</div>
+                    )}
+                    {passNotMatch && (
+                      <div className="requiredText">* Password not match</div>
+                    )}
+                    {errorsRegister.emailRegis && (
+                      <div className="requiredText">* Required Email</div>
+                    )}
+                    <input
+                      className="form-control loginInput"
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      {...Register("emailRegis", { required: true })}
+                    />
+                  </div>
 
-                  {errors.passwordRegis ? (
-                    <div className="loginInputBox text-start">
-                      {errors.passwordRegis && (
-                        <div className="requiredText">* Required Password</div>
-                      )}
-                      <input
-                        className="form-control loginInput requiredInput"
-                        placeholder="Password"
-                        name="password"
-                        type="password"
-                        {...register("passwordRegis", { required: true })}
-                      />
-                    </div>
-                  ) : (
-                    <div className="loginInputBox text-start">
-                      <input
-                        className="form-control loginInput"
-                        placeholder="Password"
-                        name="password"
-                        type="password"
-                        {...register("passwordRegis", { required: true })}
-                      />
-                    </div>
-                  )}
+                  <div className="loginInputBox text-start">
+                    {errorsRegister.passwordRegis && (
+                      <div className="requiredText">* Required Password</div>
+                    )}
+                    <input
+                      className="form-control loginInput"
+                      placeholder="Password"
+                      name="passwordRegis"
+                      type="password"
+                      {...Register("passwordRegis", { required: true })}
+                    />
+                  </div>
 
-                  {errors.passwordAgainRegis ? (
-                    <div className="loginInputBox text-start">
-                      {errors.passwordAgainRegis && (
-                        <div className="requiredText">* Required Password</div>
-                      )}
-                      <input
-                        className="form-control loginInput requiredInput"
-                        placeholder="Password Again"
-                        name="passwordAgainRegis"
-                        type="password"
-                        {...register("passwordAgainRegis", { required: true })}
-                      />
-                    </div>
-                  ) : (
-                    <div className="loginInputBox text-start">
-                      <input
-                        className="form-control loginInput"
-                        placeholder="Password Again"
-                        name="passwordAgainRegis"
-                        type="password"
-                        {...register("passwordAgainRegis", { required: true })}
-                      />
-                    </div>
-                  )}
+                  <div className="loginInputBox text-start">
+                    {errorsRegister.passwordAgainRegis && (
+                      <div className="requiredText">* Required Password</div>
+                    )}
+                    <input
+                      className="form-control loginInput"
+                      placeholder="Password Again"
+                      name="passwordAgainRegis"
+                      type="password"
+                      {...Register("passwordAgainRegis", { required: true })}
+                    />
+                  </div>
 
-                  {errors.checkbox1 ? (
-                    <div className="loginInputBox d-flex align-items-center text-start">
-                      <input
-                        className="MyCheckBox "
-                        name="checkbox1"
-                        type="checkbox"
-                        {...register("checkbox1", { required: true })}
-                      />
+                  <div className="loginInputBox d-flex align-items-center text-start">
+                    <input
+                      className="MyCheckBox "
+                      name="checkbox1"
+                      type="checkbox"
+                      {...Register("checkbox1", { required: true })}
+                    />
+                    {errorsRegister.checkbox1 ? (
                       <div className="requiredInputChackBox">
                         ยอมรับเงื่อนไข bra bra
                       </div>
-                    </div>
-                  ) : (
-                    <div className="loginInputBox d-flex align-items-center text-start">
-                      <input
-                        className="MyCheckBox "
-                        name="checkbox1"
-                        type="checkbox"
-                        {...register("checkbox1", { required: true })}
-                      />
+                    ) : (
                       <div className="loginCheckboxText">
                         ยอมรับเงื่อนไข bra bra
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
 
                   <input className="submitButton" type="submit" />
                 </form>
               ) : (
                 <form
-                  onSubmit={handleSubmit((data) => {
-                    UserLogin(data);
+                  onSubmit={handleSubmitLogin((data) => {
+                    UserLogin(data,resetLogin);
                   })}
                 >
-                  {errors.email ? (
-                    <div className="loginInputBox mt-4 text-start">
-                      {errors.email && (
-                        <div className="requiredText">* Required Email</div>
-                      )}
-                      <input
-                        className="form-control loginInput requiredInput"
-                        placeholder="Email"
-                        name="email"
-                        {...register("email", { required: true })}
-                      />
-                    </div>
-                  ) : (
-                    <div className="loginInputBox mt-4 text-start">
-                      {errors.email && (
-                        <div className="requiredText">* Required Email</div>
-                      )}
-                      <input
-                        className="form-control loginInput"
-                        placeholder="Email"
-                        name="email"
-                        {...register("email", { required: true })}
-                      />
-                    </div>
-                  )}
+                  <div className="loginInputBox mt-4 text-start">
+                    {errorInLogin.length > 0 && (
+                      <div className="requiredText">
+                        * {errorInLogin}
+                      </div>
+                    )}
+                    {errorsLogin.email && (
+                      <div className="requiredText">* Required Email</div>
+                    )}
+                    <input
+                      className="form-control loginInput"
+                      placeholder="Email"
+                      name="email"
+                      {...Login("email", { required: true })}
+                    />
+                  </div>
 
-                  {errors.password ? (
-                    <div className="loginInputBox text-start">
-                      {errors.password && (
-                        <div className="requiredText">* Required Password</div>
-                      )}
-                      <input
-                        className="form-control loginInput requiredInput"
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        {...register("password", { required: true })}
-                      />
-                    </div>
-                  ) : (
-                    <div className="loginInputBox text-start">
-                      {errors.password && (
-                        <div className="requiredText">* Required Password</div>
-                      )}
-                      <input
-                        className="form-control loginInput"
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        {...register("password", { required: true })}
-                      />
-                    </div>
-                  )}
+                  <div className="loginInputBox text-start">
+                    {errorsLogin.password && (
+                      <div className="requiredText">* Required Password</div>
+                    )}
+                    <input
+                      className="form-control loginInput"
+                      placeholder="Password"
+                      type="password"
+                      name="password"
+                      {...Login("password", { required: true })}
+                    />
+                  </div>
 
                   <input className="submitButton" type="submit" />
                 </form>
@@ -342,7 +298,7 @@ export default function Header() {
           </Modal.Body>
         </Modal>
       ) : (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleLoginClose}>
           <Modal.Body className="loginModal">
             <div>
               <img className="vonbleLogo mt-3 mb-3" src={VonbleLogo} alt="" />

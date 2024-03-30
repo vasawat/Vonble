@@ -1,0 +1,17 @@
+.CartItemBox{
+    margin-top: 10px;
+    box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.quantity-Cart-button-box {
+  margin-right: 30px;
+}
+.quantityCart-button {
+  border: none;
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+}
+.cartProductPrice {
+  margin: 0 20px;
+  width: 80px;
+}

@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 
 export default function CategoriesBox() {
   return (
-    <section className="SectionBox">
+    <section className="SectionCategoriesBox">
       <div className="allItem-Box">
         <Container>
         <Row>

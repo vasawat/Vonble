@@ -1,6 +1,19 @@
-.searchSection{
-
+.searchSection {
 }
-.search-Item-Box{
-
+.search-Item-Box {
+}
+.filterSection {
+  display: flex;
+}
+.filterBox {
+  width: 240px;
+  height: auto;
+}
+.productBox {
+  width: 1200px;
+}
+.itembox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }

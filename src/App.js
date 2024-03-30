@@ -16,8 +16,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/user/:user_id" element={<UserPage />}></Route>
-          <Route path="/user/:user_id/:cart_id" element={<Cart />}></Route>
+          <Route path="/user/:user_email" element={<UserPage />}></Route>
+          <Route path="/user/:user_id/cart" element={<Cart />}></Route>
           <Route
             path="/product/:category_id/:product_id"
             element={<Detail />}

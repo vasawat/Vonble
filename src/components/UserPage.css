@@ -1,0 +1,17 @@
+.userInfoBox {
+  min-height: 500px;
+  padding: 50px;
+}
+.userInfoInput {
+  width: 200px;
+}
+.userInfoInputSubmit {
+  width: 100px;
+  height: 50%;
+  margin-top: auto;
+}
+.requiredText {
+  margin-bottom: 3px;
+  font-size: 10px;
+  color: red;
+}
