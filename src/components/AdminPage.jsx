@@ -28,7 +28,7 @@ export default function AdminPage() {
     register: product,
     handleSubmit: handleSubmitproduct,
     reset: resetproduct,
-    formState: { errors: errorsproduct },
+    // formState: { errors: errorsproduct },
   } = useForm();
   return (
     <section className="adminPageSection">
