@@ -30,7 +30,7 @@ export const ProductProvider = ({ children }) => {
   }
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/data/products");
+      const response = await fetch("https://vonble-backend.onrender.com/data/products");
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -39,7 +39,7 @@ export const ProductProvider = ({ children }) => {
   };
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:5000/data/categories");
+      const response = await fetch("https://vonble-backend.onrender.com/data/categories");
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -49,7 +49,7 @@ export const ProductProvider = ({ children }) => {
   const UserRegister = async (data, resetRegister) => {
     if (data.passwordRegis === data.passwordAgainRegis) {
       setPassNotMatch(false);
-      fetch("http://localhost:5000/auth/register", {
+      fetch("https://vonble-backend.onrender.com/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export const ProductProvider = ({ children }) => {
     }
   };
   const UserLogin = async (data, resetLogin) => {
-    fetch("http://localhost:5000/auth/login", {
+    fetch("https://vonble-backend.onrender.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ export const ProductProvider = ({ children }) => {
   };
   const findProductDetail = async (id) => {
     const data = { product_id: id };
-    fetch("http://localhost:5000/data/productDetail", {
+    fetch("https://vonble-backend.onrender.com/data/productDetail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +138,7 @@ export const ProductProvider = ({ children }) => {
       });
   };
   const findCart = async (userID) => {
-    fetch("http://localhost:5000/user/findCart", {
+    fetch("https://vonble-backend.onrender.com/user/findCart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -157,7 +157,7 @@ export const ProductProvider = ({ children }) => {
   };
   const findUserInfo = async () => {
     const data = { user_id: userLogined.user_id };
-    fetch("http://localhost:5000/user/findUserInfo", {
+    fetch("https://vonble-backend.onrender.com/user/findUserInfo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -172,7 +172,7 @@ export const ProductProvider = ({ children }) => {
   };
   const addToCart = async (product) => {
     const data = { user_id: userLogined.user_id, product_id: product.id };
-    fetch("http://localhost:5000/user/AddItemToCart", {
+    fetch("https://vonble-backend.onrender.com/user/AddItemToCart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -187,7 +187,7 @@ export const ProductProvider = ({ children }) => {
       user_id: userLogined.user_id,
       product_id: parseInt(productID),
     };
-    fetch("http://localhost:5000/user/AddOneItemToCart", {
+    fetch("https://vonble-backend.onrender.com/user/AddOneItemToCart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -212,7 +212,7 @@ export const ProductProvider = ({ children }) => {
       user_id: userLogined.user_id,
       product_id: parseInt(productID),
     };
-    fetch("http://localhost:5000/user/MinusOneItemFromCart", {
+    fetch("https://vonble-backend.onrender.com/user/MinusOneItemFromCart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -237,7 +237,7 @@ export const ProductProvider = ({ children }) => {
       user_id: userLogined.user_id,
       product_id: parseInt(productID),
     };
-    fetch("http://localhost:5000/user/DeleteItemFromCart", {
+    fetch("https://vonble-backend.onrender.com/user/DeleteItemFromCart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -263,7 +263,7 @@ export const ProductProvider = ({ children }) => {
       fname: data.fname,
       lname: data.lname,
     };
-    fetch("http://localhost:5000/user/EditUserInfo", {
+    fetch("https://vonble-backend.onrender.com/user/EditUserInfo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -286,7 +286,7 @@ export const ProductProvider = ({ children }) => {
   };
   const searchCategory = async (category) => {
     const data = { category_id: category };
-    fetch("http://localhost:5000/data/searchCategory", {
+    fetch("https://vonble-backend.onrender.com/data/searchCategory", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -300,7 +300,7 @@ export const ProductProvider = ({ children }) => {
       });
   };
   const addProduct = async (data) => {
-    fetch("http://localhost:5000/data/addProduct", {
+    fetch("https://vonble-backend.onrender.com/data/addProduct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -330,7 +330,7 @@ export const ProductProvider = ({ children }) => {
   };
   const deleteProduct = async (productID) => {
     const data = { product_id: productID };
-    fetch("http://localhost:5000/data/deleteProduct", {
+    fetch("https://vonble-backend.onrender.com/data/deleteProduct", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
