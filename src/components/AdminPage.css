@@ -1,0 +1,74 @@
+.adminPageSection {
+}
+.allItem-Box {
+}
+.dashBoardBox {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin: 70px 0;
+}
+.dashBoardItemBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  text-align: center;
+  width: 250px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+ul.dashBoardBox li:nth-child(1) {
+  background-color: rgb(13, 110, 253);
+}
+ul.dashBoardBox li:nth-child(2) {
+  background-color: rgb(241, 185, 18);
+}
+ul.dashBoardBox li:nth-child(3) {
+  background-color: rgb(25, 135, 84);
+}
+.dashBoardText {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+}
+.adminBox {
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.adminBoxSelectBox {
+  padding: 20px;
+}
+.adminBoxSelect {
+  list-style-type: none;
+  font-size: 17px;
+  padding: 10px;
+}
+.adminBoxSelect:nth-child(1) {
+  border-bottom: black 1px solid;
+}
+.adminBoxContent {
+  padding: 25px;
+  width: 100%;
+}
+.SpecTable {
+  width: 60%;
+}
+.SpecTable td:nth-child(1) {
+  max-width: 80px;
+}
+.SpecTable td:nth-child(2) {
+  max-width: 320px;
+}
+.SpecTable div {
+  max-width: 50px;
+}
+.SpecTable td {
+  padding: 10px 12px;
+  word-wrap: break-word;
+}
+.SpecTable tr:nth-child(even) {
+  background-color: rgb(15, 99, 233, 0.15);
+}

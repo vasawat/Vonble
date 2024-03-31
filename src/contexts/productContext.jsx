@@ -7,11 +7,12 @@ export const productContext = createContext();
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([{}]);
   const [categories, setCategories] = useState([{}]);
-  const [Brands, setBrands] = useState([{}]);
   const [Search, SetSearch] = useState("");
   const [userLogined, setUserLogined] = useState({});
   const [userLoginedInfo, setUserLoginedInfo] = useState({});
   const [userLoginedCart, setUserLoginedCart] = useState({});
+  const [productDetail, setProductDetail] = useState({});
+  const [searchCategoryItem, setSearchCategoryItem] = useState([]);
   const [loginWithEmail, setLoginWithEmail] = useState(false);
   const [ModalRegister, setModalRegister] = useState(false);
   const [show, setShow] = useState(false);
@@ -41,15 +42,6 @@ export const ProductProvider = ({ children }) => {
       const response = await fetch("http://localhost:5000/data/categories");
       const data = await response.json();
       setCategories(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchBrands = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/data/Brands");
-      const data = await response.json();
-      setBrands(data);
     } catch (error) {
       console.error(error);
     }
@@ -130,6 +122,21 @@ export const ProductProvider = ({ children }) => {
         }
       });
   };
+  const findProductDetail = async (id) => {
+    const data = { product_id: id };
+    fetch("http://localhost:5000/data/productDetail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProductDetail(data);
+      });
+  };
   const findCart = async (userID) => {
     fetch("http://localhost:5000/user/findCart", {
       method: "POST",
@@ -141,11 +148,11 @@ export const ProductProvider = ({ children }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.noItemInCart){
+        if (data.noItemInCart) {
           setUserLoginedCart({});
-        }else{
+        } else {
           setUserLoginedCart(data);
-        } 
+        }
       });
   };
   const findUserInfo = async () => {
@@ -162,7 +169,7 @@ export const ProductProvider = ({ children }) => {
       .then((data) => {
         setUserLoginedInfo(data);
       });
-  }
+  };
   const addToCart = async (product) => {
     const data = { user_id: userLogined.user_id, product_id: product.id };
     fetch("http://localhost:5000/user/AddItemToCart", {
@@ -175,7 +182,6 @@ export const ProductProvider = ({ children }) => {
     });
   };
   // const buyNow = async (product) => {};
-
   const addOneInCart = async (productID) => {
     const data = {
       user_id: userLogined.user_id,
@@ -252,7 +258,11 @@ export const ProductProvider = ({ children }) => {
       });
   };
   const EditUserInfo = async (data) => {
-    const Newdata = { user_id: userLogined.user_id, fname: data.fname, lname: data.lname };
+    const Newdata = {
+      user_id: userLogined.user_id,
+      fname: data.fname,
+      lname: data.lname,
+    };
     fetch("http://localhost:5000/user/EditUserInfo", {
       method: "POST",
       headers: {
@@ -274,18 +284,90 @@ export const ProductProvider = ({ children }) => {
         }
       });
   };
+  const searchCategory = async (category) => {
+    const data = { category_id: category };
+    fetch("http://localhost:5000/data/searchCategory", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchCategoryItem(data);
+      });
+  };
+  const addProduct = async (data) => {
+    fetch("http://localhost:5000/data/addProduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          fetchData();
+          Swal.fire({
+            title: "เพิ่มสินค้าเรียบร้อย",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          Swal.fire({
+            title: "เพิ่มสินค้าไม่สําเร็จ",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  };
+  const deleteProduct = async (productID) => {
+    const data = { product_id: productID };
+    fetch("http://localhost:5000/data/deleteProduct", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          fetchData();
+          Swal.fire({
+            title: "ลบสินค้าเรียบร้อย",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }else {
+          Swal.fire({
+            title: "ลบสินค้าไม่สําเร็จ",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  }
 
   useEffect(() => {
     fetchData();
     fetchCategories();
-    fetchBrands();
   }, []);
   return (
     <productContext.Provider
       value={{
         products,
         categories,
-        Brands,
         formatMoney,
         Search,
         SetSearch,
@@ -305,6 +387,8 @@ export const ProductProvider = ({ children }) => {
         errorInLogin,
         emailDuplicate,
         passNotMatch,
+        findProductDetail,
+        productDetail,
         findCart,
         userLoginedCart,
         setUserLoginedCart,
@@ -316,6 +400,10 @@ export const ProductProvider = ({ children }) => {
         userLoginedInfo,
         findUserInfo,
         EditUserInfo,
+        searchCategory,
+        searchCategoryItem,
+        addProduct,
+        deleteProduct,
       }}
     >
       {children}

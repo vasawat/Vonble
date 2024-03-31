@@ -98,7 +98,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footer-item-3">© 2024 Vonble All Rights.</div>
+      <div className="footer-item-3" style={{ fontSize: "12px" }}>© 2024 Vonble All Rights.</div>
     </section>
   );
 }

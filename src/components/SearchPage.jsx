@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import "./SearchPage.css";
 import { useContext, useEffect, useState } from "react";
 import { productContext } from "../contexts/productContext";
@@ -8,6 +8,10 @@ export default function SearchPage() {
   const { keywordSearch } = useParams();
   const { products } = useContext(productContext);
   const [filterSearch, setFilterSearch] = useState([]);
+    const { pathname } = useLocation();
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
   useEffect(() => {
     setFilterSearch(
       products.filter(
@@ -22,7 +26,8 @@ export default function SearchPage() {
       <div className="allItem-Box">
         <p className="">Search Result {filterSearch.length} item</p>
         <section className="filterSection">
-          <div className="filterBox">
+          <div className="filterBoxContainer">
+            <div className="filterBox">
             <p>ตั้งค่าการค้นหา</p>
             <div>
               <p>ช่วงราคา</p>
@@ -32,6 +37,7 @@ export default function SearchPage() {
               <p>แบรนด์</p>
               <input type="checkbox" />
               <label htmlFor="">LG</label>
+            </div>
             </div>
           </div>
           <div className="productBox">

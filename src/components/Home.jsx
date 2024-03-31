@@ -10,10 +10,10 @@ export default function Home() {
       <Carousel />
       <CategoriesBox />
       <BestSale />
-      <EachCategoryItem thiscategory={1} />
-      <EachCategoryItem thiscategory={3} />
-      <EachCategoryItem thiscategory={2} />
-      <EachCategoryItem thiscategory={4} />
+      <EachCategoryItem categoryID={1} />
+      <EachCategoryItem categoryID={3} />
+      <EachCategoryItem categoryID={2} />
+      <EachCategoryItem categoryID={4} />
     </section>
   );
 }

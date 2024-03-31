@@ -8,6 +8,8 @@ import Detail from "./components/Detail";
 import SearchPage from "./components/SearchPage";
 import UserPage from "./components/UserPage";
 import Cart from "./components/Cart";
+import SearchCategoryPage from "./components/SearchCategoryPage";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   return (
@@ -23,6 +25,11 @@ function App() {
             element={<Detail />}
           ></Route>
           <Route path="/search/:keywordSearch" element={<SearchPage />}></Route>
+          <Route
+            path="/search/category/:keywordCategorySearch"
+            element={<SearchCategoryPage />}
+          ></Route>
+          <Route path="/admin" element={<AdminPage />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

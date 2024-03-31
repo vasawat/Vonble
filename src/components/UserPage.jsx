@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import "./UserPage.css";
 import { useContext, useEffect, useState } from "react";
 import { productContext } from "../contexts/productContext";
@@ -14,11 +14,16 @@ export default function UserPage() {
     register: userInfo,
     handleSubmit: handleSubmituserInfo,
     reset: resetuserInfo,
-    formState: { errors: errorsuserInfo },
+    // formState: { errors: errorsuserInfo },
   } = useForm();
   useEffect(() => {
     findUserInfo();
+    // eslint-disable-next-line
   }, []);
+    const { pathname } = useLocation();
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
   return (
     <section className="userPageSection">
       <div className="allItem-Box">
@@ -34,7 +39,12 @@ export default function UserPage() {
               </span>
             </h3>
           ) : (
-            <h3>name :</h3>
+            <h3>
+              name :{" "}
+              <span className="ms-2" onClick={() => setEditInfo(!editInfo)}>
+                <CiEdit size={25} />
+              </span>
+            </h3>
           )}
           {editInfo ? (
             <form

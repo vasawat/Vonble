@@ -1,6 +1,7 @@
 .DetailSection {
+}
+.Link-Box {
   display: flex;
-  justify-content: center;
 }
 .product-box {
   display: flex;
@@ -91,6 +92,15 @@
   height: 50px;
   border: none;
   border-radius: 10px;
+}
+.delete-button {
+  background-color: rgb(243, 32, 32);
+  color: white;
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 10px;
 }
 .detail-box {
   margin-top: 20px;

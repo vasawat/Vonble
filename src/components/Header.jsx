@@ -11,6 +11,7 @@ import { MdOutlineMail } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import Dropdown from "react-bootstrap/Dropdown";
 import Swal from "sweetalert2";
+import { RxDashboard } from "react-icons/rx";
 
 export default function Header() {
   const {
@@ -47,12 +48,12 @@ export default function Header() {
     reset: resetLogin,
     formState: { errors: errorsLogin },
   } = useForm();
-   const {
-     register: Register,
-     handleSubmit: handleSubmitRegister,
-     reset: resetRegister,
-     formState: { errors: errorsRegister },
-   } = useForm();
+  const {
+    register: Register,
+    handleSubmit: handleSubmitRegister,
+    reset: resetRegister,
+    formState: { errors: errorsRegister },
+  } = useForm();
 
   function LogOut() {
     setUserLoginedCart({});
@@ -113,6 +114,15 @@ export default function Header() {
             <div className="nav-item btn btn-none">
               <AiOutlineShoppingCart size={30} onClick={handleLoginShow} />
             </div>
+          )}
+
+          {userLogined.role === "admin" && (
+            <Link
+              to={`/admin`}
+              className="nav-item btn btn-none"
+            >
+              <RxDashboard size={30} />
+            </Link>
           )}
 
           <div className="nav-item">
@@ -258,14 +268,12 @@ export default function Header() {
               ) : (
                 <form
                   onSubmit={handleSubmitLogin((data) => {
-                    UserLogin(data,resetLogin);
+                    UserLogin(data, resetLogin);
                   })}
                 >
                   <div className="loginInputBox mt-4 text-start">
                     {errorInLogin.length > 0 && (
-                      <div className="requiredText">
-                        * {errorInLogin}
-                      </div>
+                      <div className="requiredText">* {errorInLogin}</div>
                     )}
                     {errorsLogin.email && (
                       <div className="requiredText">* Required Email</div>

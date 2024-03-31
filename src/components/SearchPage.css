@@ -1,13 +1,19 @@
 .searchSection {
+  margin-bottom: 100px;
 }
 .search-Item-Box {
 }
 .filterSection {
   display: flex;
 }
+.filterBoxContainer {
+  margin-right: 40px;
+}
 .filterBox {
-  width: 240px;
+  width: 300px;
   height: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 .productBox {
   width: 1200px;
