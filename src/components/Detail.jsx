@@ -286,6 +286,7 @@ export default function Detail() {
                         };
                         editProduct(newData);
                         setFormData({});
+                        findProductDetail(product_id);
                       })}
                     >
                       <Modal.Body className="row g-3 p-3">
