@@ -28,6 +28,9 @@ ul.dashBoardBox li:nth-child(2) {
 ul.dashBoardBox li:nth-child(3) {
   background-color: rgb(25, 135, 84);
 }
+ul.dashBoardBox li:nth-child(4) {
+  background-color: rgb(187, 45, 59);
+}
 .dashBoardText {
   margin: 0;
   color: white;

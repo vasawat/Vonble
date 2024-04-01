@@ -3,7 +3,7 @@ import "./AdminPage.css";
 import { useForm } from "react-hook-form";
 import { productContext } from "../contexts/productContext";
 export default function AdminPage() {
-  const { addProduct } = useContext(productContext);
+  const { addProduct, products } = useContext(productContext);
   const [adminContent, setAdminContent] = useState(1);
 
   const [formData, setFormData] = useState({}); // State for JSONB data
@@ -28,7 +28,6 @@ export default function AdminPage() {
     register: product,
     handleSubmit: handleSubmitproduct,
     reset: resetproduct,
-    // formState: { errors: errorsproduct },
   } = useForm();
   return (
     <section className="adminPageSection">
@@ -37,7 +36,9 @@ export default function AdminPage() {
           <li className="dashBoardItemBox">
             <div>
               <p className="dashBoardText">จำนวนสินค้า</p>
-              <p className="dashBoardText mt-2">0</p>
+              <p className="dashBoardText mt-2">
+                {products.length > 0 ? products.length : 0}
+              </p>
             </div>
           </li>
           <li className="dashBoardItemBox">
@@ -49,6 +50,12 @@ export default function AdminPage() {
           <li className="dashBoardItemBox">
             <div>
               <p className="dashBoardText">คำสั่งซื้อที่สมบูรณ์</p>
+              <p className="dashBoardText mt-2">0</p>
+            </div>
+          </li>
+          <li className="dashBoardItemBox">
+            <div>
+              <p className="dashBoardText">คำสั่งซื้อที่ยกเลิก</p>
               <p className="dashBoardText mt-2">0</p>
             </div>
           </li>

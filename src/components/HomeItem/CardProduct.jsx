@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import "./CardProduct.css";
 import Card from "react-bootstrap/Card";
+import { useContext } from "react";
+import { productContext } from "../../contexts/productContext";
 export default function CardProduct(props) {
+  const { formatMoney } = useContext(productContext);
   const { product } = props;
   if (!product) {
     return null;
@@ -22,9 +25,15 @@ export default function CardProduct(props) {
                 <div className="discount">-{product.discount}%</div>
               ) : null}
               <div>
-                ${Math.floor(product.price * ((100 - product.discount) / 100))}
+                $
+                {formatMoney(
+                  Math.floor(product.price * ((100 - product.discount) / 100))
+                )}
               </div>
-              <s>${(product.price)}</s>
+
+              {product.discount !== undefined && product.discount !== 0 ? (
+                <s>${product.price}</s>
+              ) : null}
             </div>
           </Card.Text>
         </Card.Body>

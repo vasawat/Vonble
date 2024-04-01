@@ -76,6 +76,10 @@
   display: flex;
   margin-top: 40px;
 }
+.admin-button-box {
+  display: flex;
+  margin-top: 10px;
+}
 .buy-button {
   background-color: rgb(15, 99, 233, 0.15);
   color: rgb(15, 99, 233);
@@ -93,6 +97,15 @@
   border: none;
   border-radius: 10px;
 }
+.edit-button {
+  background-color: rgb(243, 211, 32);
+  color: white;
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
+}
 .delete-button {
   background-color: rgb(243, 32, 32);
   color: white;
@@ -100,7 +113,6 @@
   height: 50px;
   border: none;
   border-radius: 10px;
-  margin-left: 10px;
 }
 .detail-box {
   margin-top: 20px;

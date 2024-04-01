@@ -30,7 +30,7 @@ export default function Header() {
     handleLoginShow,
     show,
     errorInLogin,
-    emailDuplicate,
+    errorInRegister,
     passNotMatch,
     setUserLoginedCart,
     setUserLoginedInfo,
@@ -59,6 +59,7 @@ export default function Header() {
     setUserLoginedCart({});
     setUserLogined({});
     setUserLoginedInfo({});
+    localStorage.removeItem("token");
     navigate("/");
     const Toast = Swal.mixin({
       toast: true,
@@ -117,10 +118,7 @@ export default function Header() {
           )}
 
           {userLogined.role === "admin" && (
-            <Link
-              to={`/admin`}
-              className="nav-item btn btn-none"
-            >
+            <Link to={`/admin`} className="nav-item btn btn-none">
               <RxDashboard size={30} />
             </Link>
           )}
@@ -201,8 +199,8 @@ export default function Header() {
                   })}
                 >
                   <div className="loginInputBox mt-4 text-start">
-                    {emailDuplicate && (
-                      <div className="requiredText">* Email already exists</div>
+                    {errorInRegister.length > 0 && (
+                      <div className="requiredText">* {errorInRegister}</div>
                     )}
                     {passNotMatch && (
                       <div className="requiredText">* Password not match</div>

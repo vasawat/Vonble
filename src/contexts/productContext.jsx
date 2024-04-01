@@ -17,7 +17,7 @@ export const ProductProvider = ({ children }) => {
   const [ModalRegister, setModalRegister] = useState(false);
   const [show, setShow] = useState(false);
   const [errorInLogin, setErrorInLogin] = useState("");
-  const [emailDuplicate, setEmailDuplicate] = useState(false);
+  const [errorInRegister, setErrorRegister] = useState("");
   const [passNotMatch, setPassNotMatch] = useState(false);
   const handleLoginClose = () => {
     setShow(false);
@@ -29,6 +29,7 @@ export const ProductProvider = ({ children }) => {
     return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }
   const fetchData = async () => {
+    // https://vonble-backend.onrender.com
     try {
       const response = await fetch("https://vonble-backend.onrender.com/data/products");
       const data = await response.json();
@@ -46,6 +47,43 @@ export const ProductProvider = ({ children }) => {
       console.error(error);
     }
   };
+  const checkToken = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("https://vonble-backend.onrender.com/auth/checkToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ token: token }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            setUserLogined({});
+          } else {
+            setUserLogined({
+              user_id: data.user_id,
+              email: data.email,
+              role: data.role,
+            });
+          }
+        });
+    } else {
+    }
+  };
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    const { exp } = JSON.parse(atob(token.split(".")[1]));
+    const now = Date.now() / 1000;
+    console.log("exp", exp, "now", now);
+    if (exp < now) {
+      console.log("Token expired already deleted !!!!!!");  
+      localStorage.removeItem("token");
+    }
+  };
   const UserRegister = async (data, resetRegister) => {
     if (data.passwordRegis === data.passwordAgainRegis) {
       setPassNotMatch(false);
@@ -60,11 +98,10 @@ export const ProductProvider = ({ children }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
-            setEmailDuplicate(true);
+            setErrorRegister(data.error);
           } else {
             handleLoginClose();
             resetRegister();
-            setEmailDuplicate(false);
             const Toast = Swal.mixin({
               toast: true,
               position: "top-end",
@@ -100,7 +137,8 @@ export const ProductProvider = ({ children }) => {
         if (data.error) {
           setErrorInLogin(data.error);
         } else {
-          setUserLogined(data);
+          localStorage.setItem("token", data.token);
+          setUserLogined(data.thisUser);
           setErrorInLogin("");
           resetLogin();
           handleLoginClose();
@@ -348,7 +386,7 @@ export const ProductProvider = ({ children }) => {
             showConfirmButton: false,
             timer: 2000,
           });
-        }else {
+        } else {
           Swal.fire({
             title: "ลบสินค้าไม่สําเร็จ",
             icon: "error",
@@ -357,11 +395,43 @@ export const ProductProvider = ({ children }) => {
           });
         }
       });
-  }
+  };
+  const editProduct = async (data) => {
+    fetch("https://vonble-backend.onrender.com/data/editProduct", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          fetchData();
+          Swal.fire({
+            title: "แก้ไขสินค้าเรียบร้อย",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          Swal.fire({
+            title: "แก้ไขสินค้าไม่สําเร็จ",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  };
 
   useEffect(() => {
     fetchData();
     fetchCategories();
+    checkToken();
+    const intervalId = setInterval(checkTokenExpiration, 60000);
+    return () => clearInterval(intervalId);
   }, []);
   return (
     <productContext.Provider
@@ -383,9 +453,8 @@ export const ProductProvider = ({ children }) => {
         handleLoginClose,
         handleLoginShow,
         show,
-        setShow,
         errorInLogin,
-        emailDuplicate,
+        errorInRegister,
         passNotMatch,
         findProductDetail,
         productDetail,
@@ -404,6 +473,7 @@ export const ProductProvider = ({ children }) => {
         searchCategoryItem,
         addProduct,
         deleteProduct,
+        editProduct,
       }}
     >
       {children}

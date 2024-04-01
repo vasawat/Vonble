@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import testimg from "./imgs/testimg.jpg";
 import { MdNavigateNext } from "react-icons/md";
+import { useForm } from "react-hook-form";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export default function Detail() {
   const {
@@ -16,6 +19,7 @@ export default function Detail() {
     findProductDetail,
     productDetail,
     deleteProduct,
+    editProduct,
   } = useContext(productContext);
   const { product_id } = useParams();
   const [Spec, setSpec] = useState({});
@@ -43,6 +47,32 @@ export default function Detail() {
       title: "Added to cart",
     });
   };
+
+  const [showEdit, setShowEdit] = useState(false);
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true);
+  const {
+    register: Edit,
+    handleSubmit: handleSubmitEdit,
+    reset: resetEdit,
+  } = useForm();
+  const [formData, setFormData] = useState({}); // State for JSONB data
+  const [fieldName, setFieldName] = useState(""); // State for field name
+  const [fieldValue, setFieldValue] = useState(""); // State for field value
+  const addField = (fieldName, fieldValue) => {
+    setFormData({
+      ...formData,
+      [fieldName]: fieldValue, // Update state using spread syntax
+    });
+    setFieldName(""); // Clear input fields after adding
+    setFieldValue("");
+  };
+  const removeField = (fieldName) => {
+    const newFormData = { ...formData };
+    delete newFormData[fieldName];
+    setFormData(newFormData);
+  };
+
   useEffect(() => {
     findProductDetail(product_id);
     // eslint-disable-next-line
@@ -51,6 +81,7 @@ export default function Detail() {
     if (productDetail.id) {
       setCurrentImageProduct(productDetail.image_url);
       setSpec(Object.entries(productDetail.spec));
+      setFormData(productDetail.spec);
     }
   }, [productDetail]);
   return (
@@ -143,17 +174,22 @@ export default function Detail() {
                   <h6>${formatMoney(parseInt(productDetail.price))}</h6>
                 </s>
               </div>
-              <p className="discount-text">
-                ประหยัดทันที{" "}
-                {formatMoney(
-                  parseInt(
-                    Math.floor(
-                      productDetail.price * (productDetail.discount / 100)
+
+              {productDetail.discount !== undefined &&
+              productDetail.discount !== 0 ? (
+                <p className="discount-text">
+                  ประหยัดทันที{" "}
+                  {formatMoney(
+                    parseInt(
+                      Math.floor(
+                        productDetail.price * (productDetail.discount / 100)
+                      )
                     )
-                  )
-                )}{" "}
-                บาท
-              </p>
+                  )}{" "}
+                  บาท
+                </p>
+              ) : null}
+
               <div className="quantity-box">
                 <div>จํานวน :</div>
 
@@ -216,7 +252,18 @@ export default function Detail() {
                     เพิ่มลงตะกร้า
                   </button>
                 )}
-                {userLogined.role === "admin" && (
+              </div>
+
+              {userLogined.role === "admin" && (
+                <div className="admin-button-box">
+                  <button
+                    onClick={() => {
+                      handleShowEdit();
+                    }}
+                    className="edit-button"
+                  >
+                    แก้ไขสินค้า
+                  </button>
                   <button
                     onClick={() => {
                       deleteProduct(productDetail.id);
@@ -226,8 +273,178 @@ export default function Detail() {
                   >
                     ลบสินค้า
                   </button>
-                )}
-              </div>
+                  <Modal size="lg" show={showEdit} onHide={handleCloseEdit}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>แก้ไข้ข้อมูลสินค้า</Modal.Title>
+                    </Modal.Header>
+                    <form
+                      onSubmit={handleSubmitEdit((data) => {
+                        let newData = {
+                          product_id: product_id,
+                          ...data,
+                          spec: { ...formData },
+                        };
+                        editProduct(newData);
+                        setFormData({});
+                      })}
+                    >
+                      <Modal.Body className="row g-3 p-3">
+                        <div class="col-md-12" style={{ textAlign: "right" }}>
+                          <div
+                            class="btn btn-danger"
+                            onClick={() => {
+                              resetEdit();
+                              setFormData({});
+                              setFormData(productDetail.spec);
+                            }}
+                          >
+                            คืนข้อมูลเริ่มต้น
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">ชื่อสินค้า :</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            defaultValue={productDetail.name}
+                            {...Edit("nameEdit", { required: true })}
+                          />
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">ราคา :</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            min={0}
+                            defaultValue={productDetail.price}
+                            {...Edit("priceEdit", { required: true })}
+                          />
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">ส่วนลด :</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            min={0}
+                            max={100}
+                            defaultValue={productDetail.discount}
+                            {...Edit("discountEdit")}
+                          />
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">จำนวน :</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            min={0}
+                            defaultValue={productDetail.quantity}
+                            {...Edit("quantityEdit", { required: true })}
+                          />
+                        </div>
+
+                        <div class="col-md-8">
+                          <label class="form-label">ลิงค์รูปภาพ :</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            defaultValue={productDetail.image_url}
+                            {...Edit("image_urlEdit")}
+                          />
+                        </div>
+
+                        <div class="col-md-2">
+                          <label class="form-label">CategoryID :</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            defaultValue={productDetail.category_id}
+                            {...Edit("category_idEdit", { required: true })}
+                          />
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">BrandID :</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            defaultValue={productDetail.brand_id}
+                            {...Edit("brand_idEdit", { required: true })}
+                          />
+                        </div>
+
+                        <div class="col-md-12">
+                          <label class="form-label">รายละเอียดสินค้า :</label>
+                          <textarea
+                            class="form-control"
+                            defaultValue={productDetail.description}
+                            {...Edit("descriptionEdit")}
+                            rows="2"
+                          />
+                        </div>
+                        {/*  */}
+                        <label class="col-md-12 form-label">สเปคสินค้า</label>
+                        <label class="col-md-1 form-label">ชื่อ field:</label>
+                        <div class="col-md-4">
+                          <input
+                            type="text"
+                            class="form-control"
+                            onChange={(e) => setFieldName(e.target.value)}
+                            value={fieldName}
+                          />
+                        </div>
+                        <label class="col-md-1 form-label">ค่า field:</label>
+                        <div class="col-md-4">
+                          <input
+                            type="text"
+                            class="form-control"
+                            onChange={(e) => setFieldValue(e.target.value)}
+                            value={fieldValue}
+                          />
+                        </div>
+                        <div class="col-md-2">
+                          <div
+                            className="btn btn-primary"
+                            onClick={() => addField(fieldName, fieldValue)}
+                          >
+                            เพิ่ม field
+                          </div>
+                        </div>
+                        <h4 className="mt-5">ตัวอย่างสเปคสินค้า</h4>
+                        <table className="SpecTable">
+                          <tbody>
+                            {Object.keys(formData).map((fieldName) => {
+                              return (
+                                <tr key={fieldName}>
+                                  <td>{fieldName}</td>
+                                  <td>{formData[fieldName]} </td>
+                                  <div
+                                    className="btn btn-danger m-2"
+                                    onClick={() => removeField(fieldName)}
+                                  >
+                                    ลบ
+                                  </div>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                        {/*  */}
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseEdit}>
+                          ปิด
+                        </Button>
+                        <Button
+                          variant="warning"
+                          type="submit"
+                          className="text-white"
+                        >
+                          แก้ไขข้อมูล
+                        </Button>
+                      </Modal.Footer>
+                    </form>
+                  </Modal>
+                </div>
+              )}
             </div>
           </div>
           <div className="detail-box">
