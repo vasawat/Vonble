@@ -285,7 +285,6 @@ export default function Detail() {
                           spec: { ...formData },
                         };
                         editProduct(newData);
-                        setFormData({});
                       })}
                     >
                       <Modal.Body className="row g-3 p-3">
