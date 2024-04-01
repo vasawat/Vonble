@@ -75,6 +75,7 @@ export default function Detail() {
 
   useEffect(() => {
     findProductDetail(product_id);
+    // eslint-disable-next-line
   }, [editProduct]);
   useEffect(() => {
     if (productDetail.id) {
