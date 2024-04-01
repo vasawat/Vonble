@@ -46,6 +46,15 @@ export const ProductProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
+  };  
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    const { exp } = JSON.parse(atob(token.split(".")[1]));
+    const now = Date.now() / 1000;
+    if (exp < now) {
+      localStorage.removeItem("token");
+    }
   };
   const checkToken = async () => {
     const token = localStorage.getItem("token");
@@ -71,17 +80,6 @@ export const ProductProvider = ({ children }) => {
           }
         });
     } else {
-    }
-  };
-  const checkTokenExpiration = () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    const { exp } = JSON.parse(atob(token.split(".")[1]));
-    const now = Date.now() / 1000;
-    console.log("exp", exp, "now", now);
-    if (exp < now) {
-      console.log("Token expired already deleted !!!!!!");  
-      localStorage.removeItem("token");
     }
   };
   const UserRegister = async (data, resetRegister) => {
@@ -409,7 +407,6 @@ export const ProductProvider = ({ children }) => {
       .then((data) => {
         if (data.success) {
           fetchData();
-          findProductDetail(data.product_id);
           Swal.fire({
             title: "แก้ไขสินค้าเรียบร้อย",
             icon: "success",
