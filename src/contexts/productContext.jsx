@@ -64,7 +64,7 @@ export const ProductProvider = ({ children }) => {
             setUserLogined({});
           } else {
             setUserLogined({
-              user_id: data.user_id,
+              user_id: data.sub,
               email: data.email,
               role: data.role,
             });
