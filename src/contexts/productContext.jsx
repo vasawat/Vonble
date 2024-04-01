@@ -409,6 +409,7 @@ export const ProductProvider = ({ children }) => {
       .then((data) => {
         if (data.success) {
           fetchData();
+          findProductDetail(data.product_id);
           Swal.fire({
             title: "แก้ไขสินค้าเรียบร้อย",
             icon: "success",
