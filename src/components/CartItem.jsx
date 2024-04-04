@@ -22,9 +22,9 @@ export default function CartItem({ productsID, productCount }) {
   return (
     <div className="CartItemBox">
       {thisProduct !== undefined ? (
-        <div className="d-flex p-2">
+        <div className="d-flex p-2 align-items-center">
           <img width={80} src={thisProduct.image_url} alt="" />
-          <p>{thisProduct.name.substring(0, 20)}...</p>
+          <span className="ms-2">{thisProduct.name.substring(0, 30)}...</span>
           <div className="ms-auto pe-3 d-flex align-items-center">
             <div className="quantity-Cart-button-box">
               <button

@@ -1,24 +1,33 @@
 import React, { createContext, useState, useEffect } from "react";
 import VonbleLogo from "../components/imgs/vonbleLogo.png";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export const productContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([{}]);
   const [categories, setCategories] = useState([{}]);
+  const [brands, setBrands] = useState([{}]);
   const [Search, SetSearch] = useState("");
   const [userLogined, setUserLogined] = useState({});
   const [userLoginedInfo, setUserLoginedInfo] = useState({});
   const [userLoginedCart, setUserLoginedCart] = useState({});
+  const [userLoginedAddress, setUserLoginedAddress] = useState([{}]);
+  const [userLoginedCartID, setUserLoginedCartID] = useState();
+  const [userLoginedTransaction, setUserLoginedTransaction] = useState({});
   const [productDetail, setProductDetail] = useState({});
+  const [transactionDetail, setTransactionDetail] = useState({});
+  const [paymentData, setPaymentData] = useState({});
   const [searchCategoryItem, setSearchCategoryItem] = useState([]);
+  const [searchBrandItem, setSearchBrandItem] = useState([]);
   const [loginWithEmail, setLoginWithEmail] = useState(false);
   const [ModalRegister, setModalRegister] = useState(false);
   const [show, setShow] = useState(false);
   const [errorInLogin, setErrorInLogin] = useState("");
   const [errorInRegister, setErrorRegister] = useState("");
   const [passNotMatch, setPassNotMatch] = useState(false);
+  const navigate = useNavigate();
   const handleLoginClose = () => {
     setShow(false);
     setLoginWithEmail(false);
@@ -28,6 +37,44 @@ export const ProductProvider = ({ children }) => {
   function formatMoney(money) {
     return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }
+  const showOverlay = (time) => {
+    // สร้าง overlay div
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    overlay.style.position = "fixed";
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.zIndex = 9999;
+
+    // สร้าง spinner div
+    const spinner = document.createElement("div");
+    spinner.classList.add("spinner");
+    spinner.style.position = "absolute";
+    spinner.style.top = "50%";
+    spinner.style.left = "50%";
+    spinner.style.transform = "translate(-50%, -50%)";
+    spinner.style.width = "50px";
+    spinner.style.height = "50px";
+    spinner.style.borderRadius = "50%";
+    spinner.style.border = "5px solid #fff";
+    spinner.style.borderTopColor = "transparent";
+    spinner.style.animation = "spinner-animation 1s linear infinite";
+
+    // เพิ่ม spinner ลงใน overlay
+    overlay.appendChild(spinner);
+
+    // เพิ่ม overlay ลงใน body
+    document.body.appendChild(overlay);
+
+    // ตั้งเวลา 1 วินาที
+    setTimeout(() => {
+      // ลบ overlay ออก
+      document.body.removeChild(overlay);
+    }, time);
+  };
   const fetchData = async () => {
     // https://vonble-backend.onrender.com
     try {
@@ -46,7 +93,16 @@ export const ProductProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  };  
+  };
+  const fetchBrands = async () => {
+    try {
+      const response = await fetch("https://vonble-backend.onrender.com/data/brands");
+      const data = await response.json();
+      setBrands(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const checkTokenExpiration = () => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -54,6 +110,10 @@ export const ProductProvider = ({ children }) => {
     const now = Date.now() / 1000;
     if (exp < now) {
       localStorage.removeItem("token");
+      setUserLogined({});
+      setUserLoginedCart({});
+      setUserLoginedInfo({});
+      navigate("/");
     }
   };
   const checkToken = async () => {
@@ -187,7 +247,8 @@ export const ProductProvider = ({ children }) => {
         if (data.noItemInCart) {
           setUserLoginedCart({});
         } else {
-          setUserLoginedCart(data);
+          setUserLoginedCartID(data.cart_id);
+          setUserLoginedCart(data.productArray);
         }
       });
   };
@@ -206,24 +267,55 @@ export const ProductProvider = ({ children }) => {
         setUserLoginedInfo(data);
       });
   };
-  const addToCart = async (product) => {
-    const data = { user_id: userLogined.user_id, product_id: product.id };
-    fetch("https://vonble-backend.onrender.com/user/AddItemToCart", {
+  const findUserAddress = async (userID) => {
+    fetch("https://vonble-backend.onrender.com/user/findUserAddress", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(data),
-    });
+      body: JSON.stringify({ user_id: userID }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserLoginedAddress(data);
+      });
   };
-  // const buyNow = async (product) => {};
-  const addOneInCart = async (productID) => {
+  const findUserTransaction = async (userID) => {
+    fetch("https://vonble-backend.onrender.com/user/findUserTransaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ user_id: userID }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserLoginedTransaction(data);
+      });
+  };
+  const findTransactionDetail = async (transactionID) => {
+    fetch("https://vonble-backend.onrender.com/user/findTransactionDetail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ transaction_id: transactionID }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setTransactionDetail(data);
+      });
+  };
+  const addToCart = async (product, quantityCount) => {
     const data = {
       user_id: userLogined.user_id,
-      product_id: parseInt(productID),
+      product_id: product.id,
+      quantity: quantityCount,
     };
-    fetch("https://vonble-backend.onrender.com/user/AddOneItemToCart", {
+    fetch("https://vonble-backend.onrender.com/user/AddItemToCart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -234,6 +326,27 @@ export const ProductProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          findCart(userLogined.user_id);
+        }
+      });
+  };
+  const addOneInCart = async (productID) => {
+    const data = {
+      user_id: userLogined.user_id,
+      product_id: parseInt(productID),
+    };
+    fetch("https://vonble-backend.onrender.com/user/AddOneItemFromCart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          findCart(userLogined.user_id);
           Swal.fire({
             title: "เพิ่มสินค้าเรียบร้อย",
             icon: "success",
@@ -259,6 +372,7 @@ export const ProductProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          findCart(userLogined.user_id);
           Swal.fire({
             title: "ลบสินค้าเรียบร้อย",
             icon: "success",
@@ -284,6 +398,7 @@ export const ProductProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          findCart(userLogined.user_id);
           Swal.fire({
             title: "ลบสินค้าเรียบร้อย",
             icon: "success",
@@ -333,6 +448,21 @@ export const ProductProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setSearchCategoryItem(data);
+      });
+  };
+  const searchBrand = async (brand) => {
+    const data = { brand_id: brand };
+    fetch("https://vonble-backend.onrender.com/data/searchBrand", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchBrandItem(data);
       });
   };
   const addProduct = async (data) => {
@@ -423,20 +553,202 @@ export const ProductProvider = ({ children }) => {
         }
       });
   };
+  const addCategory = async (data) => {
+    fetch("https://vonble-backend.onrender.com/data/addCategory", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          fetchCategories();
+          Swal.fire({
+            title: "เพิ่มหมวดหมู่เรียบร้อย",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+        }
+      });
+  };
+  const addBrand = async (data) => {
+    fetch("https://vonble-backend.onrender.com/data/addBrand", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          fetchBrands();
+          Swal.fire({
+            title: "เพิ่มแบรนดหมู่เรียบร้อย",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+        }
+      });
+  };
+  const CreateShippingAddresss = async (data) => {
+    fetch("https://vonble-backend.onrender.com/transaction/CreateShippingAddresss", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          showOverlay(1000);
+          setTimeout(() => {
+            Swal.fire({
+              title: "เพิ่มที่อยู่เรียบร้อย",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }, 1000);
+        } else {
+          Swal.fire({
+            title: "เพิ่มที่อยู่ไม่สําเร็จ",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  };
+  const deleteAddress = async (addressID) => {
+    const data = { address_id: addressID };
+    fetch("https://vonble-backend.onrender.com/transaction/deleteAddress", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          findUserAddress(userLogined.user_id);
+          showOverlay(1000);
+          setTimeout(() => {
+            Swal.fire({
+              title: "ลบที่อยู่เรียบร้อย",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }, 1000);
+        }
+      });
+  };
+  const CreateTransaction = async (data) => {
+    fetch("https://vonble-backend.onrender.com/transaction/CreateTransaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          showOverlay(4000);
+          setTimeout(() => {
+            navigate(
+              `/user/${userLogined.user_id}/payment/${data.transactionID}`
+            );
+          }, 4000);
+          Swal.fire({
+            title: "สั่งซื้อสินค้าเรียบร้อย",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          Swal.fire({
+            title: "สั่งซื้อสินค้าไม่สําเร็จ",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  };
+  const deleteTransaction = async (transactionID) => {
+    const data = { transaction_id: transactionID };
+    fetch("https://vonble-backend.onrender.com/transaction/deleteTransaction", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          findUserTransaction(userLogined.user_id);
+          showOverlay(1000);
+          setTimeout(() => {
+            navigate(`/user/${userLogined.user_id}/transaction`);
+            Swal.fire({
+              title: "ยกเลิกการสั่งซื้อสินค้าเรียบร้อย",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }, 1000);
+        }
+      });
+  }
+  const findPaymentData = async (transactionID) => {
+    fetch("https://vonble-backend.onrender.com/transaction/findPaymentData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ transaction_id: transactionID }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPaymentData(data);
+      });
+  };
 
   useEffect(() => {
     fetchData();
     fetchCategories();
+    fetchBrands();
     checkToken();
     const intervalId = setInterval(checkTokenExpiration, 60000);
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line
   }, []);
   return (
     <productContext.Provider
       value={{
         products,
         categories,
+        brands,
         formatMoney,
+        showOverlay,
         Search,
         SetSearch,
         VonbleLogo,
@@ -459,6 +771,7 @@ export const ProductProvider = ({ children }) => {
         findCart,
         userLoginedCart,
         setUserLoginedCart,
+        userLoginedCartID,
         addToCart,
         addOneInCart,
         minusOneInCart,
@@ -467,11 +780,27 @@ export const ProductProvider = ({ children }) => {
         userLoginedInfo,
         findUserInfo,
         EditUserInfo,
+        findUserAddress,
+        userLoginedAddress,
         searchCategory,
         searchCategoryItem,
+        searchBrand,
+        searchBrandItem,
         addProduct,
         deleteProduct,
         editProduct,
+        addCategory,
+        addBrand,
+        CreateShippingAddresss,
+        CreateTransaction,
+        findUserTransaction,
+        userLoginedTransaction,
+        findTransactionDetail,
+        transactionDetail,
+        findPaymentData,
+        deleteTransaction,
+        paymentData,
+        deleteAddress,
       }}
     >
       {children}

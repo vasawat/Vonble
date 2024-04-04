@@ -52,6 +52,12 @@ ul.dashBoardBox li:nth-child(4) {
 .adminBoxSelect:nth-child(1) {
   border-bottom: black 1px solid;
 }
+.adminBoxSelect:nth-child(2) {
+  border-bottom: black 1px solid;
+}
+.adminBoxSelect:nth-child(3) {
+  border-bottom: black 1px solid;
+}
 .adminBoxContent {
   padding: 25px;
   width: 100%;

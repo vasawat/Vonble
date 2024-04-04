@@ -14,6 +14,11 @@ export default function Home() {
       <EachCategoryItem categoryID={3} />
       <EachCategoryItem categoryID={2} />
       <EachCategoryItem categoryID={4} />
+      <div className="scrolling-text-box">
+        <div className="scrolling-text">
+          <p className="text-scrolling">Welcome to Vonble.</p>
+        </div>
+      </div>
     </section>
   );
 }

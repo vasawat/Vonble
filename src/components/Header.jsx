@@ -73,7 +73,7 @@ export default function Header() {
       },
     });
     Toast.fire({
-      icon: "error",
+      icon: "success",
       title: "Log out successfully",
     });
   }
@@ -107,12 +107,12 @@ export default function Header() {
           {userLogined.email ? (
             <Link
               to={`/user/${userLogined.user_id}/cart`}
-              className="nav-item btn btn-none"
+              className="nav-item btn btn-none MyNavReactLogo"
             >
               <AiOutlineShoppingCart size={30} />
             </Link>
           ) : (
-            <div className="nav-item btn btn-none">
+            <div className="nav-item btn btn-none MyNavReactLogo">
               <AiOutlineShoppingCart size={30} onClick={handleLoginShow} />
             </div>
           )}
@@ -123,26 +123,42 @@ export default function Header() {
             </Link>
           )}
 
-          <div className="nav-item">
-            {userLogined.email ? (
-              <Dropdown variant="none">
-                <Dropdown.Toggle variant="none">
-                  <FaRegUserCircle size={30} />
-                </Dropdown.Toggle>
+          {userLogined.email ? (
+            <Dropdown variant="none">
+              <Dropdown.Toggle
+                variant="none"
+                className="userIconToggle nav-item MyNavReactLogo"
+              >
+                <FaRegUserCircle size={30} />
+              </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <Link to={`/user/${userLogined.email}`}>User Profile</Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => LogOut()}>Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            ) : (
-              <div className="btn">
-                <FaRegUserCircle size={30} onClick={handleLoginShow} />
-              </div>
-            )}
-          </div>
+              <Dropdown.Menu className="p-0 userMenu">
+                <Dropdown.Item
+                  className="py-2"
+                  onClick={() => navigate(`/user/${userLogined.email}`)}
+                >
+                  โปรไฟล์
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  className="py-2"
+                  onClick={() =>
+                    navigate(`/user/${userLogined.user_id}/transaction`)
+                  }
+                >
+                  คำสั่งซื้อ
+                </Dropdown.Item>
+
+                <Dropdown.Item className="py-2" onClick={() => LogOut()}>
+                  ออกจากระบบ
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          ) : (
+            <div className="btn">
+              <FaRegUserCircle size={30} onClick={handleLoginShow} />
+            </div>
+          )}
         </div>
       </div>
 
@@ -309,23 +325,27 @@ export default function Header() {
             <div>
               <img className="vonbleLogo mt-3 mb-3" src={VonbleLogo} alt="" />
               <h3>Vonble</h3>
-              <div className="loginTypeBox">
+              <div
+                className="loginTypeBox loginSelectT"
+                onClick={() => setLoginWithEmail(true)}
+              >
+                <MdOutlineMail className="loginTypeIcon" />
+                <div>ล็อคอินด้วยอีเมล</div>
+              </div>
+              <div className="orDivider">
+                <span>หรือ</span>
+              </div>
+
+              <div className="loginTypeBox loginSelectT">
                 <FcGoogle className="loginTypeIcon" />
                 <div>ล็อคอินด้วย Google</div>
               </div>
-              <div className="loginTypeBox">
+              <div className="loginTypeBox loginSelectT">
                 <FaFacebook
                   style={{ color: "#1877F2" }}
                   className="loginTypeIcon"
                 />
                 <div>ล็อคอินด้วย Facebook</div>
-              </div>
-              <div
-                className="loginTypeBox"
-                onClick={() => setLoginWithEmail(true)}
-              >
-                <MdOutlineMail className="loginTypeIcon" />
-                <div>ล็อคอินด้วยอีเมล</div>
               </div>
             </div>
           </Modal.Body>

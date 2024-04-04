@@ -13,6 +13,7 @@ import Modal from "react-bootstrap/Modal";
 export default function Detail() {
   const {
     formatMoney,
+    showOverlay,
     userLogined,
     handleLoginShow,
     addToCart,
@@ -97,7 +98,7 @@ export default function Detail() {
             </p>
             <p>
               <Link to={`/search/category/${productDetail.category_id}`}>
-                Product
+                {productDetail.category_name}
               </Link>
             </p>
             <p>
@@ -149,9 +150,11 @@ export default function Detail() {
             </div>
             <div className="right-box">
               <h2>{productDetail.name}</h2>
-              <p className="brand-products-detail">
+              <Link to={`/search/brand/${productDetail.brand_id}`}><p className="brand-products-detail">
                 {productDetail.brand_name}
               </p>
+              </Link>
+              
               <div className="price-products-detail">
                 {productDetail.discount !== undefined &&
                 productDetail.discount !== 0 ? (
@@ -221,7 +224,18 @@ export default function Detail() {
               </div>
               <div className="buy-button-box">
                 {userLogined.email ? (
-                  <button className="buy-button">ซื้อสินค้า</button>
+                  <button
+                    onClick={() => {
+                      addToCart(productDetail, quantityCount);
+                      showOverlay(1000);
+                        setTimeout(() => {
+                          navigate(`/user/${userLogined.user_id}/cart`);
+                        }, 1000);
+                    }}
+                    className="buy-button"
+                  >
+                    ซื้อสินค้า
+                  </button>
                 ) : (
                   <button
                     onClick={() => {
@@ -235,7 +249,7 @@ export default function Detail() {
                 {userLogined.email ? (
                   <button
                     onClick={() => {
-                      addToCart(productDetail);
+                      addToCart(productDetail, quantityCount);
                       sweetAlertAddToCart();
                     }}
                     className="incart-button"

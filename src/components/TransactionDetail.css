@@ -1,0 +1,30 @@
+.TransactionDetailSection {
+  margin-bottom: 15rem;
+  padding: 10px;
+}
+.TransactionDetailBox {
+  display: flex;
+  flex-direction: column;
+}
+.statusBox {
+  margin: 10px 0 20px 0;
+  display: flex;
+  align-items: center;
+}
+.productTransactionTable {
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.productTransactionBox {
+}
+.productTransactionBox td {
+  padding: 20px;
+}
+.productTransactionBox td:nth-child(2) {
+  text-align: center;
+}
+.productTransactionBox td:nth-child(3) {
+  text-align: center;
+}
+.productTransactionBox tr:hover {
+  background-color: rgb(15, 99, 233, 0.1);
+}

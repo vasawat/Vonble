@@ -1,30 +1,6 @@
 .sectionFooter {
-  overflow: hidden;
+  margin-top: 10px;
 }
-
-.text-scrolling {
-  font-family: "Lexend Deca", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 150px;
-  color: rgb(15, 99, 233);
-}
-
-.scrolling-text {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: scrollText1 20s linear infinite;
-}
-
-@keyframes scrollText1 {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
 .footer-item-1 {
   background-color: rgb(15, 99, 233);
   color: white;

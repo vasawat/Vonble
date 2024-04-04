@@ -3,7 +3,8 @@ import "./AdminPage.css";
 import { useForm } from "react-hook-form";
 import { productContext } from "../contexts/productContext";
 export default function AdminPage() {
-  const { addProduct, products } = useContext(productContext);
+  const { addProduct, products, brands, addBrand, categories, addCategory } =
+    useContext(productContext);
   const [adminContent, setAdminContent] = useState(1);
 
   const [formData, setFormData] = useState({}); // State for JSONB data
@@ -28,6 +29,16 @@ export default function AdminPage() {
     register: product,
     handleSubmit: handleSubmitproduct,
     reset: resetproduct,
+  } = useForm();
+  const {
+    register: category,
+    handleSubmit: handleSubmitCategory,
+    reset: resetCategory,
+  } = useForm();
+  const {
+    register: brand,
+    handleSubmit: handleSubmitBrand,
+    reset: resetBrand,
   } = useForm();
   return (
     <section className="adminPageSection">
@@ -73,6 +84,20 @@ export default function AdminPage() {
               className="adminBoxSelect"
               role="button"
               onClick={() => setAdminContent(2)}
+            >
+              AddCategory
+            </div>
+            <div
+              className="adminBoxSelect"
+              role="button"
+              onClick={() => setAdminContent(3)}
+            >
+              AddBrand
+            </div>
+            <div
+              className="adminBoxSelect"
+              role="button"
+              onClick={() => setAdminContent(4)}
             >
               Transection
             </div>
@@ -226,6 +251,117 @@ export default function AdminPage() {
               </form>
             )}
             {adminContent === 2 && (
+              <div>
+                <form
+                  class="row g-3"
+                  onSubmit={handleSubmitCategory((data) => {
+                    addCategory(data);
+                    resetCategory();
+                  })}
+                >
+                  <div class="col-md-12" style={{ textAlign: "right" }}>
+                    <div
+                      class="btn btn-danger"
+                      onClick={() => {
+                        resetCategory();
+                      }}
+                    >
+                      ล้างข้อมูล
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <label class="form-label">ชื่อหมวดหมู่ :</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      {...category("categoryName")}
+                    />
+                  </div>
+                  <div class="col-md-5">
+                    <label class="form-label">ชื่อหมวดหมู่ Eng :</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      {...category("categoryNameEng")}
+                    />
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                      เพิ่มหมวดหมู่สินค้า
+                    </button>
+                  </div>
+                </form>
+                <div>
+                  <span>ID</span>
+                  <span className="ms-2">Name</span>
+                </div>
+                {categories.map((category) => (
+                  <div>
+                    <div>
+                      <span>{category.id}</span>
+                      <span className="ms-2">{category.name}</span>
+                      <span></span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {adminContent === 3 && (
+              <div>
+                <form
+                  class="row g-3"
+                  onSubmit={handleSubmitBrand((data) => {
+                    addBrand(data);
+                    resetBrand();
+                  })}
+                >
+                  <div class="col-md-12" style={{ textAlign: "right" }}>
+                    <div
+                      class="btn btn-danger"
+                      onClick={() => {
+                        resetBrand();
+                      }}
+                    >
+                      ล้างข้อมูล
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <label class="form-label">ชื่อแบรนด์ :</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      {...brand("brandName")}
+                    />
+                  </div>
+                  <div class="col-md-5">
+                    <label class="form-label">รูปภาพแบรนด์ :</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      {...brand("brandImageUrl")}
+                    />
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                      เพิ่มแบรนด์หมู่สินค้า
+                    </button>
+                  </div>
+                </form>
+                <div>
+                  <span>ID</span>
+                  <span className="ms-2">Name</span>
+                </div>
+                {brands.map((brand) => (
+                  <div>
+                    <div>
+                      <span>{brand.id}</span>
+                      <span className="ms-2">{brand.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {adminContent === 4 && (
               <div>
                 <h1>Transection</h1>
                 <h1>Transection</h1>

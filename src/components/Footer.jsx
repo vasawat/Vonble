@@ -10,9 +10,7 @@ export default function Footer() {
   const { VonbleLogo } = useContext(productContext);
   return (
     <section className="sectionFooter">
-      <div className="scrolling-text">
-        <p className="text-scrolling">Welcome to Vonble.</p>
-      </div>
+
 
       <div className="footer-item-1">
         <div className="footer-item-1-1">

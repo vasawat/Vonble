@@ -1,0 +1,132 @@
+.TransactionPageSection {
+  margin-bottom: 17rem;
+}
+.transactionBoxSelecter {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    
+}
+.transactionBtn{
+    width: 150px;
+    padding: 7px 15px;
+    border: none;
+    background-color: white;
+    border-bottom: 4px solid transparent;
+    transition: all .55s;
+}
+.transactionBtn:hover{
+    border-bottom: 4px solid rgba(13, 110, 253);
+}
+.transactionBtnActive{
+    border-bottom: 4px solid rgba(13, 110, 253);
+}
+.transactionBox {
+  padding: 0 10px;
+}
+.transactionHeadItemBox {
+  display: flex;
+  padding: 20px;
+  margin: 20px 10px;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+  background-color: rgb(245, 245, 245);
+  color: black;
+}
+.transactionHeadItemBox > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+}
+.transactionHeadItemBox > span:nth-child(1) {
+  width: 10%;
+  padding: 10px;
+}
+.transactionHeadItemBox > span:nth-child(2) {
+  width: 20%;
+  padding: 10px;
+}
+.transactionHeadItemBox > span:nth-child(3) {
+  width: 20%;
+  padding: 10px;
+}
+.transactionHeadItemBox > span:nth-child(4) {
+  width: 10%;
+  padding: 10px;
+}
+.transactionHeadItemBox > span:nth-child(5) {
+  width: 10%;
+  padding: 10px;
+}
+.transactionHeadItemBox > span:nth-child(6) {
+  width: 20%;
+  padding: 10px;
+}
+.transactionHeadItemBox > span:nth-child(7) {
+  width: 10%;
+  padding: 10px;
+}
+.transactionItemBox {
+  display: flex;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+  background-color: rgb(245, 245, 245);
+  color: black;
+  border-radius: 10px;
+}
+.transactionItemBox > span {
+  word-wrap: break-word;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+}
+.transactionItemBox > span:nth-child(1) {
+  width: 10%;
+  padding: 10px;
+  border-radius: 10px;
+}
+.PendingPayment {
+  background-color: rgb(233, 179, 19);
+  color: white;
+}
+.PaymentReceived{
+  background-color: rgb(13, 110, 253);
+  color: white;
+}
+.completed{
+  background-color: rgb(25, 135, 84);
+  color: white;
+}
+.transactionItemBox > span:nth-child(2) {
+  width: 20%;
+  padding: 10px;
+}
+.transactionItemBox > span:nth-child(3) {
+  width: 20%;
+  padding: 10px;
+}
+.transactionItemBox > span:nth-child(4) {
+  width: 10%;
+  padding: 10px;
+}
+.transactionItemBox > span:nth-child(5) {
+  width: 10%;
+  padding: 10px;
+}
+.transactionItemBox > span:nth-child(6) {
+  width: 20%;
+  padding: 10px;
+}
+.transactionItemBox > a {
+  display: flex;
+  justify-content: center;
+  color: black;
+  width: 10%;
+  padding: 10px;
+  background-color: rgb(211, 211, 211);
+  border-radius: 10px;
+}
+.transactionItemBox > a:hover {
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}

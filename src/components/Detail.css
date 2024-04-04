@@ -120,10 +120,10 @@
 .spac-box {
   margin-top: 40px;
 }
-td {
+.SpecTable td {
   text-align: left;
   padding: 10px 12px;
 }
-tr:nth-child(even) {
+.SpecTable tr:nth-child(even) {
   background-color: rgb(15, 99, 233, 0.15);
 }

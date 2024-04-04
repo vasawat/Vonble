@@ -8,6 +8,27 @@
 .nav-item {
   cursor: pointer;
 }
+.MyNavReactLogo {
+  color: rgb(82, 82, 82);
+}
+.userIconToggle {
+  transition: all 0.55s;
+}
+
+.userMenu {
+  animation: fadeIn 0.55s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.DropDownItem {
+  margin: auto;
+}
 .gap-3 {
   gap: 0;
 }
@@ -39,6 +60,26 @@
   outline: rgb(198, 197, 197) 1px solid;
   border-radius: 20px;
 }
+.orDivider {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.orDivider::before,
+.orDivider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid black;
+  margin: 0 10px;
+}
+.loginSelectT {
+  transition: box-shadow 0.55s;
+}
+.loginSelectT:hover {
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
 .loginTypeEmailBox {
   display: block;
   padding: 0;
@@ -57,6 +98,7 @@
   color: white;
   background-color: rgb(15, 99, 233);
   border: none;
+  transition: all 0.55s;
 }
 .loginRegisbuttonSelect {
   width: 50%;
@@ -64,6 +106,7 @@
   color: white;
   background-color: rgb(15, 99, 233, 0.8);
   border: none;
+  transition: all 0.55s;
 }
 .loginRegisText {
   margin: 8px 0;
