@@ -17,6 +17,7 @@ export default function TransactionDetail() {
   useEffect(() => {
     showOverlay(700);
     findTransactionDetail(transectionID);
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     setThisTransactionProduct(transactionDetail.cart_product);
