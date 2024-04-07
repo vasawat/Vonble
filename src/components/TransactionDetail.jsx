@@ -24,7 +24,6 @@ export default function TransactionDetail() {
     setThisTransactionProduct(transactionDetail.cart_product);
     setThisTransactionAddress(transactionDetail.address);
   }, [transactionDetail]);
-  console.log(thisTransactionProduct);
   return (
     <section className="TransactionDetailSection">
       <div className="allItem-Box">

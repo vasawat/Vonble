@@ -76,7 +76,6 @@ export default function Cart() {
     );
     // eslint-disable-next-line
   }, []);
-  console.log(userLoginedCart)
   return (
     <section className="sectionCart">
       <div className="allItem-Box">

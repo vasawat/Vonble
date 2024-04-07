@@ -98,11 +98,6 @@ export default function AdminPage() {
     }
   }, [sortUserLoginedTransaction]);
 
-  console.log(transactionPaid);
-  console.log(transactionUnpaid);
-  console.log(transactionCompleted);
-  console.log(transactionCancel);
-
   return (
     <section className="adminPageSection">
       <div className="allItem-Box">
