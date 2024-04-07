@@ -1,5 +1,5 @@
 .TransactionPageSection {
-  margin-bottom: 17rem;
+margin: 3rem 0 15rem 0;
 }
 .transactionBoxSelecter {
     display: flex;
@@ -96,6 +96,10 @@
 }
 .completed{
   background-color: rgb(25, 135, 84);
+  color: white;
+}
+.Cancelled{
+  background-color: rgb(243, 32, 32);
   color: white;
 }
 .transactionItemBox > span:nth-child(2) {

@@ -57,7 +57,7 @@ export default function CartItem({ productsID, productCount }) {
               </button>
             </div>
             <p className="cartProductPrice">
-              - {formatMoney(thisProduct.price * cartQuantityCount)}
+              ฿{formatMoney(thisProduct.price * cartQuantityCount)}
             </p>
             <span
               className="ms-2"

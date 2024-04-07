@@ -55,18 +55,18 @@ useEffect(() => {
                   <CardProduct product={thisCategortItem[1]} />
                   <CardProduct product={thisCategortItem[2]} />
                   <CardProduct product={thisCategortItem[3]} />
+                  <CardProduct product={thisCategortItem[2]} />
                   <CardProduct product={thisCategortItem[1]} />
-                  <CardProduct product={thisCategortItem[3]} />
                 </div>
               </Carousel.Item>
               <Carousel.Item className="carousel-box-category">
                 <div className="carousel-item-category">
-                  <CardProduct product={thisCategortItem[3]} />
                   <CardProduct product={thisCategortItem[2]} />
                   <CardProduct product={thisCategortItem[1]} />
                   <CardProduct product={thisCategortItem[3]} />
+                  <CardProduct product={thisCategortItem[2]} />
                   <CardProduct product={thisCategortItem[0]} />
-                  <CardProduct product={thisCategortItem[3]} />
+                  <CardProduct product={thisCategortItem[1]} />
                 </div>
               </Carousel.Item>
             </Carousel>

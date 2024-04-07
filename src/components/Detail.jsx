@@ -77,7 +77,7 @@ export default function Detail() {
   useEffect(() => {
     findProductDetail(product_id);
     // eslint-disable-next-line
-  }, [editProduct]);
+  }, [product_id]);
   useEffect(() => {
     if (productDetail.id) {
       setCurrentImageProduct(productDetail.image_url);
@@ -91,7 +91,7 @@ export default function Detail() {
         <div className="allItem-Box">
           <div className="Link-Box">
             <p>
-              <Link to={"/"}>Home</Link>
+              <Link to={"/"}>หน้าเเรก</Link>
             </p>
             <p>
               <MdNavigateNext />
@@ -142,19 +142,22 @@ export default function Detail() {
                   alt=""
                 />
               </div>
-              <img
-                className="product-img-detail"
-                src={currentImageProduct}
-                alt=""
-              />
+              <div className="product-img-detail-Box">
+                <img
+                  className="product-img-detail"
+                  src={currentImageProduct}
+                  alt=""
+                />
+              </div>
             </div>
             <div className="right-box">
               <h2>{productDetail.name}</h2>
-              <Link to={`/search/brand/${productDetail.brand_id}`}><p className="brand-products-detail">
-                {productDetail.brand_name}
-              </p>
+              <Link to={`/search/brand/${productDetail.brand_id}`}>
+                <p className="brand-products-detail">
+                  {productDetail.brand_name}
+                </p>
               </Link>
-              
+
               <div className="price-products-detail">
                 {productDetail.discount !== undefined &&
                 productDetail.discount !== 0 ? (
@@ -173,9 +176,12 @@ export default function Detail() {
                     )
                   )}
                 </h3>
-                <s>
-                  <h6>${formatMoney(parseInt(productDetail.price))}</h6>
-                </s>
+                {productDetail.discount !== undefined &&
+                productDetail.discount !== 0 ? (
+                  <s>
+                    <h6>${formatMoney(parseInt(productDetail.price))}</h6>
+                  </s>
+                ) : null}
               </div>
 
               {productDetail.discount !== undefined &&
@@ -228,9 +234,9 @@ export default function Detail() {
                     onClick={() => {
                       addToCart(productDetail, quantityCount);
                       showOverlay(1000);
-                        setTimeout(() => {
-                          navigate(`/user/${userLogined.user_id}/cart`);
-                        }, 1000);
+                      setTimeout(() => {
+                        navigate(`/user/${userLogined.user_id}/cart`);
+                      }, 1000);
                     }}
                     className="buy-button"
                   >
@@ -291,20 +297,11 @@ export default function Detail() {
                     <Modal.Header closeButton>
                       <Modal.Title>แก้ไข้ข้อมูลสินค้า</Modal.Title>
                     </Modal.Header>
-                    <form
-                      onSubmit={handleSubmitEdit((data) => {
-                        let newData = {
-                          product_id: product_id,
-                          ...data,
-                          spec: { ...formData },
-                        };
-                        editProduct(newData);
-                      })}
-                    >
+                    <form>
                       <Modal.Body className="row g-3 p-3">
-                        <div class="col-md-12" style={{ textAlign: "right" }}>
+                        <div className="col-md-12" style={{ textAlign: "right" }}>
                           <div
-                            class="btn btn-danger"
+                            className="btn btn-danger"
                             onClick={() => {
                               resetEdit();
                               setFormData({});
@@ -314,106 +311,106 @@ export default function Detail() {
                             คืนข้อมูลเริ่มต้น
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <label class="form-label">ชื่อสินค้า :</label>
+                        <div className="col-md-6">
+                          <label className="form-label">ชื่อสินค้า :</label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             defaultValue={productDetail.name}
                             {...Edit("nameEdit", { required: true })}
                           />
                         </div>
-                        <div class="col-md-2">
-                          <label class="form-label">ราคา :</label>
+                        <div className="col-md-2">
+                          <label className="form-label">ราคา :</label>
                           <input
                             type="number"
-                            class="form-control"
+                            className="form-control"
                             min={0}
                             defaultValue={productDetail.price}
                             {...Edit("priceEdit", { required: true })}
                           />
                         </div>
-                        <div class="col-md-2">
-                          <label class="form-label">ส่วนลด :</label>
+                        <div className="col-md-2">
+                          <label className="form-label">ส่วนลด :</label>
                           <input
                             type="number"
-                            class="form-control"
+                            className="form-control"
                             min={0}
                             max={100}
                             defaultValue={productDetail.discount}
                             {...Edit("discountEdit")}
                           />
                         </div>
-                        <div class="col-md-2">
-                          <label class="form-label">จำนวน :</label>
+                        <div className="col-md-2">
+                          <label className="form-label">จำนวน :</label>
                           <input
                             type="number"
-                            class="form-control"
+                            className="form-control"
                             min={0}
                             defaultValue={productDetail.quantity}
                             {...Edit("quantityEdit", { required: true })}
                           />
                         </div>
 
-                        <div class="col-md-8">
-                          <label class="form-label">ลิงค์รูปภาพ :</label>
+                        <div className="col-md-8">
+                          <label className="form-label">ลิงค์รูปภาพ :</label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             defaultValue={productDetail.image_url}
                             {...Edit("image_urlEdit")}
                           />
                         </div>
 
-                        <div class="col-md-2">
-                          <label class="form-label">CategoryID :</label>
+                        <div className="col-md-2">
+                          <label className="form-label">CategoryID :</label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             defaultValue={productDetail.category_id}
                             {...Edit("category_idEdit", { required: true })}
                           />
                         </div>
-                        <div class="col-md-2">
-                          <label class="form-label">BrandID :</label>
+                        <div className="col-md-2">
+                          <label className="form-label">BrandID :</label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             defaultValue={productDetail.brand_id}
                             {...Edit("brand_idEdit", { required: true })}
                           />
                         </div>
 
-                        <div class="col-md-12">
-                          <label class="form-label">รายละเอียดสินค้า :</label>
+                        <div className="col-md-12">
+                          <label className="form-label">รายละเอียดสินค้า :</label>
                           <textarea
-                            class="form-control"
+                            className="form-control"
                             defaultValue={productDetail.description}
                             {...Edit("descriptionEdit")}
                             rows="2"
                           />
                         </div>
                         {/*  */}
-                        <label class="col-md-12 form-label">สเปคสินค้า</label>
-                        <label class="col-md-1 form-label">ชื่อ field:</label>
-                        <div class="col-md-4">
+                        <label className="col-md-12 form-label">สเปคสินค้า</label>
+                        <label className="col-md-1 form-label">ชื่อ field:</label>
+                        <div className="col-md-4">
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             onChange={(e) => setFieldName(e.target.value)}
                             value={fieldName}
                           />
                         </div>
-                        <label class="col-md-1 form-label">ค่า field:</label>
-                        <div class="col-md-4">
+                        <label className="col-md-1 form-label">ค่า field:</label>
+                        <div className="col-md-4">
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             onChange={(e) => setFieldValue(e.target.value)}
                             value={fieldValue}
                           />
                         </div>
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                           <div
                             className="btn btn-primary"
                             onClick={() => addField(fieldName, fieldValue)}
@@ -450,6 +447,14 @@ export default function Detail() {
                           variant="warning"
                           type="submit"
                           className="text-white"
+                          onClick={handleSubmitEdit((data) => {
+                            let newData = {
+                              product_id: product_id,
+                              ...data,
+                              spec: { ...formData },
+                            };
+                            editProduct(newData);
+                          })}
                         >
                           แก้ไขข้อมูล
                         </Button>

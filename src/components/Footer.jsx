@@ -7,11 +7,9 @@ import { useContext } from "react";
 import { productContext } from "../contexts/productContext";
 
 export default function Footer() {
-  const { VonbleLogo } = useContext(productContext);
+  const { MjnVonbleLogo } = useContext(productContext);
   return (
     <section className="sectionFooter">
-
-
       <div className="footer-item-1">
         <div className="footer-item-1-1">
           <TbTruckDelivery className="me-3" size={40} />
@@ -39,13 +37,15 @@ export default function Footer() {
 
       <div className="footer-item-2">
         <div className="">
-          <img className="logoFooter" src={VonbleLogo} alt="" />
+          <img className="logoFooter" src={MjnVonbleLogo} alt="" />
           <p className="m-0">Vonble คือ project เว็บไซต์</p>
           <p className="m-0">E-commerce</p>
         </div>
         <div className="">
           <div>สร้างโดย</div>
-          <a href="https://github.com/vasawat">https://github.com/vasawat</a>
+          <a className="text-dark" href="https://github.com/vasawat">
+            https://github.com/vasawat
+          </a>
         </div>
         <div className="">
           <div>ติดต่อเรา</div>
@@ -53,50 +53,56 @@ export default function Footer() {
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://www.mercular.com/images/social/facebook.png"
+                src="https://vasawatawsvonble.s3.amazonaws.com/facebook.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://www.mercular.com/images/social/twitter.png"
+                src="https://vasawatawsvonble.s3.amazonaws.com/instagram.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://www.mercular.com/images/social/tiktok.png"
+                src="https://vasawatawsvonble.s3.amazonaws.com/line.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://www.mercular.com/images/social/youtube.png"
+                src="https://vasawatawsvonble.s3.amazonaws.com/tiktok.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://www.mercular.com/images/social/instagram.png"
+                src="https://vasawatawsvonble.s3.amazonaws.com/twitter.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://www.mercular.com/images/social/line.png"
+                src="https://vasawatawsvonble.s3.amazonaws.com/youtube.png"
                 alt=""
               />
             </Link>
           </div>
         </div>
+        <div className="">
+          <div>เบอร์ติดต่อ</div>
+          <div>083-232-5607</div>
+        </div>
       </div>
 
-      <div className="footer-item-3" style={{ fontSize: "12px" }}>© 2024 Vonble All Rights.</div>
+      <div className="footer-item-3" style={{ fontSize: "12px" }}>
+        © 2024 Vonble All Rights. | Terms & Conditions | Privacy Policy
+      </div>
     </section>
   );
 }

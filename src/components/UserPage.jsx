@@ -29,7 +29,7 @@ export default function UserPage() {
       <div className="allItem-Box">
         <div className="userInfoBox">
           <h3>Welcome to Vonble</h3>
-          <h3>Email : {user_email}</h3>
+
 
           {userLoginedInfo.fname ? (
             <h3>
@@ -66,7 +66,6 @@ export default function UserPage() {
                     {...userInfo("fname", { required: true })}
                   />
                 </div>
-
                 <div>
                   <label for="fname" className="form-label">
                     Lastname :
@@ -77,18 +76,13 @@ export default function UserPage() {
                   />
                 </div>
               </div>
-
-              {/* {errorsuserInfo.fname ||
-            (errorsuserInfo.lname && (
-              <span className="requiredText">This field is required</span>
-            ))} */}
-
               <input
                 className="form-control userInfoInputSubmit ms-2"
                 type="submit"
               />
             </form>
-          ) : null}
+          ) : null} 
+          <h3>Email : {user_email}</h3>
         </div>
       </div>
     </section>

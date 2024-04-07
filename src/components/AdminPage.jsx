@@ -1,22 +1,40 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./AdminPage.css";
 import { useForm } from "react-hook-form";
 import { productContext } from "../contexts/productContext";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+
 export default function AdminPage() {
-  const { addProduct, products, brands, addBrand, categories, addCategory } =
-    useContext(productContext);
+  const {
+    addProduct,
+    products,
+    brands,
+    addBrand,
+    categories,
+    addCategory,
+    deleteBrand,
+    fetchTransaction,
+    allTransaction,
+  } = useContext(productContext);
   const [adminContent, setAdminContent] = useState(1);
 
-  const [formData, setFormData] = useState({}); // State for JSONB data
-  const [fieldName, setFieldName] = useState(""); // State for field name
-  const [fieldValue, setFieldValue] = useState(""); // State for field value
-
+  const [formData, setFormData] = useState({});
+  const [fieldName, setFieldName] = useState("");
+  const [fieldValue, setFieldValue] = useState("");
+  const [sortUserLoginedTransaction, setSortUserLoginedTransaction] = useState(
+    []
+  );
+  const [transactionPaid, setTransactionPaid] = useState([]);
+  const [transactionUnpaid, setTransactionUnpaid] = useState([]);
+  const [transactionCompleted, setTransactionCompleted] = useState([]);
+  const [transactionCancel, setTransactionCancel] = useState([]);
   const addField = (fieldName, fieldValue) => {
     setFormData({
       ...formData,
-      [fieldName]: fieldValue, // Update state using spread syntax
+      [fieldName]: fieldValue,
     });
-    setFieldName(""); // Clear input fields after adding
+    setFieldName("");
     setFieldValue("");
   };
   const removeField = (fieldName) => {
@@ -40,6 +58,51 @@ export default function AdminPage() {
     handleSubmit: handleSubmitBrand,
     reset: resetBrand,
   } = useForm();
+
+  useEffect(() => {
+    fetchTransaction();
+    // eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    if (allTransaction) {
+      let newT = Object.values(allTransaction).sort((a, b) => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateB - dateA;
+      });
+      setSortUserLoginedTransaction(newT);
+    }
+  }, [allTransaction]);
+  useEffect(() => {
+    if (sortUserLoginedTransaction.length > 0) {
+      setTransactionPaid(
+        sortUserLoginedTransaction.filter(
+          (item) => item.order_status === "PaymentReceived"
+        )
+      );
+      setTransactionUnpaid(
+        sortUserLoginedTransaction.filter(
+          (item) => item.order_status === "PendingPayment"
+        )
+      );
+      setTransactionCompleted(
+        sortUserLoginedTransaction.filter(
+          (item) => item.order_status === "completed"
+        )
+      );
+      setTransactionCancel(
+        sortUserLoginedTransaction.filter(
+          (item) => item.order_status === "Cancelled"
+        )
+      );
+    }
+  }, [sortUserLoginedTransaction]);
+
+  console.log(transactionPaid);
+  console.log(transactionUnpaid);
+  console.log(transactionCompleted);
+  console.log(transactionCancel);
+
   return (
     <section className="adminPageSection">
       <div className="allItem-Box">
@@ -55,19 +118,26 @@ export default function AdminPage() {
           <li className="dashBoardItemBox">
             <div>
               <p className="dashBoardText">คำสั่งซื้อที่รอดําเนินการ</p>
-              <p className="dashBoardText mt-2">0</p>
+              <p className="dashBoardText mt-2">
+                {transactionUnpaid &&
+                  transactionUnpaid.length + transactionPaid.length}
+              </p>
             </div>
           </li>
           <li className="dashBoardItemBox">
             <div>
               <p className="dashBoardText">คำสั่งซื้อที่สมบูรณ์</p>
-              <p className="dashBoardText mt-2">0</p>
+              <p className="dashBoardText mt-2">
+                {transactionCompleted && transactionCompleted.length}
+              </p>
             </div>
           </li>
           <li className="dashBoardItemBox">
             <div>
               <p className="dashBoardText">คำสั่งซื้อที่ยกเลิก</p>
-              <p className="dashBoardText mt-2">0</p>
+              <p className="dashBoardText mt-2">
+                {transactionCancel && transactionCancel.length}
+              </p>
             </div>
           </li>
         </ul>
@@ -105,7 +175,7 @@ export default function AdminPage() {
           <div className="adminBoxContent">
             {adminContent === 1 && (
               <form
-                class="row g-3"
+                className="row g-3"
                 onSubmit={handleSubmitproduct((data) => {
                   let newData = { ...data, spec: { ...formData } };
                   addProduct(newData);
@@ -113,9 +183,9 @@ export default function AdminPage() {
                   setFormData({});
                 })}
               >
-                <div class="col-md-12" style={{ textAlign: "right" }}>
+                <div className="col-md-12" style={{ textAlign: "right" }}>
                   <div
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                     onClick={() => {
                       resetproduct();
                       setFormData({});
@@ -124,98 +194,105 @@ export default function AdminPage() {
                     ล้างข้อมูล
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label">ชื่อสินค้า :</label>
+                <div className="col-md-6">
+                  <label className="form-label">ชื่อสินค้า :</label>
                   <input
                     type="text"
-                    class="form-control"
-                    {...product("name")}
+                    className="form-control"
+                    {...product("name", { required: true })}
                   />
                 </div>
-                <div class="col-md-2">
-                  <label class="form-label">ราคา :</label>
+                <div className="col-md-2">
+                  <label className="form-label">ราคา :</label>
                   <input
                     type="number"
-                    class="form-control"
+                    className="form-control"
                     min={0}
-                    {...product("price")}
+                    {...product("price", { required: true })}
                   />
                 </div>
-                <div class="col-md-2">
-                  <label class="form-label">ส่วนลด :</label>
+                <div className="col-md-2">
+                  <label className="form-label">ส่วนลด :</label>
                   <input
                     type="number"
-                    class="form-control"
+                    className="form-control"
                     min={0}
                     max={100}
-                    {...product("discount")}
+                    {...product("discount", { required: true })}
                   />
                 </div>
-                <div class="col-md-2">
-                  <label class="form-label">จำนวน :</label>
+                <div className="col-md-2">
+                  <label className="form-label">จำนวน :</label>
                   <input
                     type="number"
-                    class="form-control"
+                    className="form-control"
                     min={0}
-                    {...product("quantity")}
+                    {...product("quantity", { required: true })}
                   />
                 </div>
 
-                <div class="col-md-8">
-                  <label class="form-label">ลิงค์รูปภาพ :</label>
+                <div className="col-md-8">
+                  <label className="form-label">ลิงค์รูปภาพ :</label>
                   <input
                     type="text"
-                    class="form-control"
-                    {...product("image_url")}
+                    className="form-control"
+                    {...product("image_url", { required: true })}
                   />
                 </div>
 
-                <div class="col-md-2">
-                  <label class="form-label">CategoryID :</label>
+                <div className="col-md-2">
+                  <label className="form-label d-flex align-items-center">
+                    <IoIosInformationCircleOutline classNameName="me-2" size={22} />
+                    CategoryID :
+                  </label>
+
                   <input
                     type="text"
-                    class="form-control"
-                    {...product("category_id")}
+                    className="form-control"
+                    {...product("category_id", { required: true })}
                   />
                 </div>
-                <div class="col-md-2">
-                  <label class="form-label">BrandID :</label>
+                <div className="col-md-2">
+                  <label className="form-label d-flex align-items-center">
+                    <IoIosInformationCircleOutline classNameName="me-2" size={22} />
+                    BrandID :
+                  </label>
                   <input
                     type="text"
-                    class="form-control"
-                    {...product("brand_id")}
+                    className="form-control"
+                    {...product("brand_id", { required: true })}
                   />
                 </div>
 
-                <div class="col-md-12">
-                  <label class="form-label">รายละเอียดสินค้า :</label>
+                <div className="col-md-12">
+                  <label className="form-label">รายละเอียดสินค้า :</label>
                   <textarea
-                    class="form-control"
+                    className="form-control"
                     {...product("description")}
                     rows="2"
                   />
                 </div>
                 {/*  */}
-                <label class="col-md-12 form-label">สเปคสินค้า</label>
-                <label class="col-md-1 form-label">ชื่อ field:</label>
-                <div class="col-md-4">
+                <label className="col-md-12 form-label">สเปคสินค้า</label>
+                <label className="col-md-1 form-label">ชื่อ field:</label>
+                <div className="col-md-4">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     onChange={(e) => setFieldName(e.target.value)}
                     value={fieldName}
                   />
                 </div>
-                <label class="col-md-1 form-label">ค่า field:</label>
-                <div class="col-md-4">
+                <label className="col-md-1 form-label">ค่า field:</label>
+                <div className="col-md-4">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     onChange={(e) => setFieldValue(e.target.value)}
                     value={fieldValue}
                   />
                 </div>
-                <div class="col-md-2">
+                <div className="col-md-2">
                   <div
                     className="btn btn-primary"
                     onClick={() => addField(fieldName, fieldValue)}
@@ -243,8 +320,8 @@ export default function AdminPage() {
                   </tbody>
                 </table>
                 {/*  */}
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary">
+                <div className="col-12">
+                  <button type="submit" className="btn btn-primary">
                     เพิ่มสินค้า
                   </button>
                 </div>
@@ -253,15 +330,15 @@ export default function AdminPage() {
             {adminContent === 2 && (
               <div>
                 <form
-                  class="row g-3"
+                  className="row g-3"
                   onSubmit={handleSubmitCategory((data) => {
                     addCategory(data);
                     resetCategory();
                   })}
                 >
-                  <div class="col-md-12" style={{ textAlign: "right" }}>
+                  <div className="col-md-12" style={{ textAlign: "right" }}>
                     <div
-                      class="btn btn-danger"
+                      className="btn btn-danger"
                       onClick={() => {
                         resetCategory();
                       }}
@@ -269,24 +346,24 @@ export default function AdminPage() {
                       ล้างข้อมูล
                     </div>
                   </div>
-                  <div class="col-md-5">
-                    <label class="form-label">ชื่อหมวดหมู่ :</label>
+                  <div className="col-md-5">
+                    <label className="form-label">ชื่อหมวดหมู่ :</label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       {...category("categoryName")}
                     />
                   </div>
-                  <div class="col-md-5">
-                    <label class="form-label">ชื่อหมวดหมู่ Eng :</label>
+                  <div className="col-md-5">
+                    <label className="form-label">ชื่อหมวดหมู่ Eng :</label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       {...category("categoryNameEng")}
                     />
                   </div>
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
+                  <div className="col-12">
+                    <button type="submit" className="btn btn-primary">
                       เพิ่มหมวดหมู่สินค้า
                     </button>
                   </div>
@@ -295,8 +372,8 @@ export default function AdminPage() {
                   <span>ID</span>
                   <span className="ms-2">Name</span>
                 </div>
-                {categories.map((category) => (
-                  <div>
+                {categories.map((category, index) => (
+                  <div key={index}>
                     <div>
                       <span>{category.id}</span>
                       <span className="ms-2">{category.name}</span>
@@ -309,15 +386,15 @@ export default function AdminPage() {
             {adminContent === 3 && (
               <div>
                 <form
-                  class="row g-3"
+                  className="row g-3"
                   onSubmit={handleSubmitBrand((data) => {
                     addBrand(data);
                     resetBrand();
                   })}
                 >
-                  <div class="col-md-12" style={{ textAlign: "right" }}>
+                  <div className="col-md-12" style={{ textAlign: "right" }}>
                     <div
-                      class="btn btn-danger"
+                      className="btn btn-danger"
                       onClick={() => {
                         resetBrand();
                       }}
@@ -325,24 +402,24 @@ export default function AdminPage() {
                       ล้างข้อมูล
                     </div>
                   </div>
-                  <div class="col-md-5">
-                    <label class="form-label">ชื่อแบรนด์ :</label>
+                  <div className="col-md-5">
+                    <label className="form-label">ชื่อแบรนด์ :</label>
                     <input
                       type="text"
-                      class="form-control"
-                      {...brand("brandName")}
+                      className="form-control"
+                      {...brand("brandName", { required: true })}
                     />
                   </div>
-                  <div class="col-md-5">
-                    <label class="form-label">รูปภาพแบรนด์ :</label>
+                  <div className="col-md-5">
+                    <label className="form-label">รูปภาพแบรนด์ :</label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       {...brand("brandImageUrl")}
                     />
                   </div>
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
+                  <div className="col-12">
+                    <button type="submit" className="btn btn-primary">
                       เพิ่มแบรนด์หมู่สินค้า
                     </button>
                   </div>
@@ -351,22 +428,45 @@ export default function AdminPage() {
                   <span>ID</span>
                   <span className="ms-2">Name</span>
                 </div>
-                {brands.map((brand) => (
-                  <div>
-                    <div>
-                      <span>{brand.id}</span>
-                      <span className="ms-2">{brand.name}</span>
-                    </div>
+                {brands.map((brand, index) => (
+                  <div className="p-1" key={index}>
+                    <span>{brand.id}</span>
+                    <span className="ms-2">{brand.name}</span>
+                    <span
+                      className="btn btn-danger ms-2"
+                      onClick={() => deleteBrand(brand.id)}
+                    >
+                      ลบแบรนด์นี้
+                    </span>
                   </div>
                 ))}
               </div>
             )}
             {adminContent === 4 && (
               <div>
-                <h1>Transection</h1>
-                <h1>Transection</h1>
-                <h1>Transection</h1>
-                <h1>Transection</h1>
+                <div className="transactionBox">
+                  {sortUserLoginedTransaction.length > 0 ? (
+                    sortUserLoginedTransaction.map((item) => (
+                      <div className="transactionItemBox">
+                        <span className={`${item.order_status}`}>
+                          {item.order_status}
+                        </span>
+                        <span>{item.transaction_id}</span>
+                        <span>{item.payment_method}</span>
+                        <span>฿{item.shipping_fee}</span>
+                        <span>฿{item.grand_total}</span>
+                        <span>{item.order_date}</span>
+                        <Link
+                          to={`/user/${item.user_id}/transaction/${item.transaction_id}`}
+                        >
+                          Detail
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    <p>ยังไม่มีการสั่งซื้อ</p>
+                  )}
+                </div>
               </div>
             )}
           </div>

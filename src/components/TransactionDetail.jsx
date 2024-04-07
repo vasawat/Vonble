@@ -11,6 +11,7 @@ export default function TransactionDetail() {
     transactionDetail,
     deleteTransaction,
     showOverlay,
+    formatMoney,
   } = useContext(productContext);
   const [thisTransactionProduct, setThisTransactionProduct] = useState([]);
   const [thisTransactionAddress, setThisTransactionAddress] = useState({});
@@ -23,6 +24,7 @@ export default function TransactionDetail() {
     setThisTransactionProduct(transactionDetail.cart_product);
     setThisTransactionAddress(transactionDetail.address);
   }, [transactionDetail]);
+  console.log(thisTransactionProduct);
   return (
     <section className="TransactionDetailSection">
       <div className="allItem-Box">
@@ -39,19 +41,30 @@ export default function TransactionDetail() {
               >
                 ชำระเงิน
               </Link>
-              <div className="btn btn-danger ms-2" onClick={()=>{
-                deleteTransaction(transectionID);
-              }}>
+              <div
+                className="btn btn-danger ms-2"
+                onClick={() => {
+                  deleteTransaction(transectionID);
+                }}
+              >
                 ยกเลิกคำสั่งซื้อ
               </div>
             </div>
           ) : (
             <div className="statusBox">
-              <span>สถานะคำสั่งซื้อ : {transactionDetail.order_status}</span>
+              {transactionDetail.order_status === "PaymentReceived" && (
+                <span>สถานะคำสั่งซื้อ : ชำระเงินแล้ว รอจัดส่ง</span>
+              )}
+              {transactionDetail.order_status === "completed" && (
+                <span>สถานะคำสั่งซื้อ : สำเร็จ</span>
+              )}
+              {transactionDetail.order_status === "Cancelled" && (
+                <span>สถานะคำสั่งซื้อ : ยกเลิก</span>
+              )}
             </div>
           )}
 
-          <div className="userAddressBox">
+          <div className="userAddressBox mb-4">
             {thisTransactionAddress && thisTransactionAddress.address ? (
               <div>
                 <header className="userAddressBoxHead">
@@ -76,26 +89,36 @@ export default function TransactionDetail() {
                 {thisTransactionProduct && thisTransactionProduct.length > 0
                   ? thisTransactionProduct.map((product, index) => (
                       <tr key={index}>
+                        <td>
+                          <img
+                            className="imageTransactionDetailProduct"
+                            src={product.image_url}
+                            alt=""
+                          />
+                        </td>
                         <td>{product.name}</td>
                         <td>{product.count} ชิ้น</td>
-                        <td>฿{product.price * product.count}</td>
+                        <td>฿{formatMoney(product.price * product.count)}</td>
                       </tr>
                     ))
                   : null}
                 <tr>
                   <td>คูปองส่วนลด</td>
                   <td></td>
+                  <td></td>
                   <td>฿0</td>
                 </tr>
                 <tr>
                   <td>ค่าส่ง</td>
+                  <td></td>
                   <td></td>
                   <td>฿60</td>
                 </tr>
                 <tr>
                   <td>ราคาสุทธิ</td>
                   <td></td>
-                  <td>฿{transactionDetail.grand_total}</td>
+                  <td></td>
+                  <td>฿{formatMoney(transactionDetail.grand_total)}</td>
                 </tr>
               </tbody>
             </table>

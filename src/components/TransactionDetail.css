@@ -1,5 +1,5 @@
 .TransactionDetailSection {
-  margin-bottom: 15rem;
+  margin: 3rem 0 15rem 0;
   padding: 10px;
 }
 .TransactionDetailBox {
@@ -14,15 +14,19 @@
 .productTransactionTable {
   box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
+.imageTransactionDetailProduct{
+  width: 70px;
+  height: 70px;
+}
 .productTransactionBox {
 }
 .productTransactionBox td {
   padding: 20px;
 }
-.productTransactionBox td:nth-child(2) {
+.productTransactionBox td:nth-child(3) {
   text-align: center;
 }
-.productTransactionBox td:nth-child(3) {
+.productTransactionBox td:nth-child(4) {
   text-align: center;
 }
 .productTransactionBox tr:hover {

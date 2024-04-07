@@ -1,6 +1,11 @@
 .navbar {
-  padding: 40px 140px;
+  padding: 25px 140px;
   transition: all 0.55s;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+    box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
 }
 .navbar-brand {
   font-size: 35px;
@@ -13,6 +18,15 @@
 }
 .userIconToggle {
   transition: all 0.55s;
+}
+.vonbleNavText {
+  font-size: 25px;
+  margin-left: 10px;
+}
+.vonbleLogoNav {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
 }
 
 .userMenu {
@@ -42,12 +56,29 @@
 #searchBtn {
   border-radius: 20px;
 }
+.vonbleHeadTextModal {
+  color: rgb(15, 99, 233);
+  font-weight: 500;
+  font-size: 25px;
+}
+.vonbleLogoModal {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+.MyModal {
+  z-index: 9999;
+  width: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .loginModal {
   display: flex;
   justify-content: center;
   text-align: center;
   width: auto;
-  height: 630px;
+  height: 610px;
 }
 .loginTypeBox {
   position: relative;
@@ -115,6 +146,11 @@
   width: 30px;
   height: 30px;
   margin: 0 25px;
+}
+.loginTypeIconBack {
+  width: 30px;
+  height: 30px;
+  margin: 0 30px 0 0px;
 }
 .requiredInput {
   border-color: #ea4141; /* Bootstrap danger color */

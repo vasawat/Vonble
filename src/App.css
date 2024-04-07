@@ -6,6 +6,30 @@
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
+/* ::-webkit-scrollbar-thumb {
+ background: rgb(15, 99, 233);
+ border-radius: 20px; 
+ border: 2px solid red;
+} */
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(15, 99, 233, 0.7);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(15, 99, 233, 0.9);
+}
 a {
   text-decoration: none;
 }

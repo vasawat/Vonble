@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
+import { IoChevronBackOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import Dropdown from "react-bootstrap/Dropdown";
 import Swal from "sweetalert2";
@@ -17,7 +18,7 @@ export default function Header() {
   const {
     Search,
     SetSearch,
-    VonbleLogo,
+    MjnVonbleLogo,
     userLogined,
     setUserLogined,
     UserRegister,
@@ -32,6 +33,7 @@ export default function Header() {
     errorInLogin,
     errorInRegister,
     passNotMatch,
+    setPassNotMatch,
     setUserLoginedCart,
     setUserLoginedInfo,
   } = useContext(productContext);
@@ -81,9 +83,9 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand d-flex align-items-center">
-          <img className="vonbleLogo me-1" src={VonbleLogo} alt="" />
-          Vonble
+        <Link to="/" className="navbar-brand d-flex align-items-center" onClick={()=>window.scrollTo(0, 0)}>
+          <img className="vonbleLogoNav me-1" src={MjnVonbleLogo} alt="" />
+          <span className="vonbleNavText">Vonble</span>
         </Link>
 
         <form className="d-flex" role="search" onSubmit={toSearchPage}>
@@ -93,7 +95,7 @@ export default function Header() {
             type="search"
             placeholder="ค้นหาสินค้า"
             onChange={(e) => SetSearch(e.target.value)}
-          />
+          required/>
           <button
             id="searchBtn"
             className="btn btn-outline-primary"
@@ -163,18 +165,30 @@ export default function Header() {
       </div>
 
       {loginWithEmail ? (
-        <Modal show={show} onHide={handleLoginClose}>
-          <Modal.Body className="loginModal ">
+        <Modal
+          className="MyModal"
+          show={show}
+          onHide={() => {
+            handleLoginClose();
+            setModalRegister(false);
+            setPassNotMatch(false);
+          }}
+        >
+          <Modal.Body className="loginModal">
             <div>
-              <img className="vonbleLogo mt-3 mb-3" src={VonbleLogo} alt="" />
-              <h3>Vonble</h3>
+              <img
+                className="vonbleLogoModal mt-3 mb-2"
+                src={MjnVonbleLogo}
+                alt=""
+              />
+              <div className="vonbleHeadTextModal">Welcome</div>
               <div className="loginTypeBox loginTypeEmailBox">
                 <div
                   className="d-flex align-items-center pt-2 px-4 mt-3"
                   onClick={() => setLoginWithEmail(false)}
                 >
-                  <MdOutlineMail className="loginTypeIcon" />
-                  <div>ล็อคอินด้วยอีเมล</div>
+                  <IoChevronBackOutline className="loginTypeIconBack" />
+                  <div className="ms-2">ล็อคอินด้วยอีเมล</div>
                 </div>
                 <div className="loginRegisbuttonBox">
                   <button
@@ -186,7 +200,10 @@ export default function Header() {
                   >
                     <div
                       className="loginRegisText"
-                      onClick={() => setModalRegister(false)}
+                      onClick={() => {
+                        setModalRegister(false);
+                        resetRegister();
+                      }}
                     >
                       ล็อคอิน
                     </div>
@@ -200,7 +217,10 @@ export default function Header() {
                   >
                     <div
                       className="loginRegisText"
-                      onClick={() => setModalRegister(true)}
+                      onClick={() => {
+                        setModalRegister(true);
+                        resetLogin();
+                      }}
                     >
                       สมัครสมาชิก
                     </div>
@@ -320,11 +340,23 @@ export default function Header() {
           </Modal.Body>
         </Modal>
       ) : (
-        <Modal show={show} onHide={handleLoginClose}>
+        <Modal
+          className="MyModal"
+          show={show}
+          onHide={() => {
+            handleLoginClose();
+            setModalRegister(false);
+            setPassNotMatch(false);
+          }}
+        >
           <Modal.Body className="loginModal">
             <div>
-              <img className="vonbleLogo mt-3 mb-3" src={VonbleLogo} alt="" />
-              <h3>Vonble</h3>
+              <img
+                className="vonbleLogoModal mt-3 mb-2"
+                src={MjnVonbleLogo}
+                alt=""
+              />
+              <div className="vonbleHeadTextModal">Welcome</div>
               <div
                 className="loginTypeBox loginSelectT"
                 onClick={() => setLoginWithEmail(true)}

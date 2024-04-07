@@ -4,12 +4,10 @@ import { productContext } from "../contexts/productContext";
 import CartItem from "./CartItem";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import kplus from "./imgs/kplus.jpg";
-import scb from "./imgs/scb.jpg";
-import krungthai from "./imgs/krungthai.jpg";
 import { FiMapPin } from "react-icons/fi";
 import { RiCoupon2Line } from "react-icons/ri";
 import { FaRegTrashAlt } from "react-icons/fa";
+import kplus from "./imgs/kplus.jpg";
 
 export default function Cart() {
   const {
@@ -78,6 +76,7 @@ export default function Cart() {
     );
     // eslint-disable-next-line
   }, []);
+  console.log(userLoginedCart)
   return (
     <section className="sectionCart">
       <div className="allItem-Box">
@@ -285,7 +284,20 @@ export default function Cart() {
                       <input
                         {...payment("payment_method", { required: true })}
                         type="radio"
-                        value="Kplus"
+                        value="promptpay"
+                      />
+                      <img
+                        className="imgBank"
+                        src="https://www.bot.or.th/content/dam/bot/icons/icon-thaiqr.png"
+                        alt=""
+                      />
+                      PromptPay
+                    </label>
+                    <label className="BankLabel">
+                      <input
+                        {...payment("payment_method", { required: true })}
+                        type="radio"
+                        value="kplus"
                       />
                       <img className="imgBank" src={kplus} alt="" />
                       Kplus
@@ -294,25 +306,7 @@ export default function Cart() {
                       <input
                         {...payment("payment_method", { required: true })}
                         type="radio"
-                        value="SCBEasy"
-                      />
-                      <img className="imgBank" src={scb} alt="" />
-                      SCB Easy
-                    </label>
-                    <label className="BankLabel">
-                      <input
-                        {...payment("payment_method", { required: true })}
-                        type="radio"
-                        value="KrungthaiNEXT"
-                      />
-                      <img className="imgBank" src={krungthai} alt="" />
-                      Krungthai NEXT
-                    </label>
-                    <label className="BankLabel">
-                      <input
-                        {...payment("payment_method", { required: true })}
-                        type="radio"
-                        value="CashOnDelivery"
+                        value="cashondelivery"
                       />
                       <span className="ms-2">เก็บเงินปลายทาง</span>
                     </label>
@@ -326,11 +320,30 @@ export default function Cart() {
             <div className="overall_Cart">
               <div className="overall_Cart_top">
                 <h4 className="mb-3">สรุปคำสั่งซื้อ</h4>
-                <div className="overall_Item_Box">
-                  <span className="overall_Item_1">จํานวนสินค้า</span>
-                  <span className="overall_Item_2">{totalCount}</span>
-                  <span className="overall_Item_3">รายการ</span>
-                </div>
+                <h5 className="mb-3">จํานวนสินค้า {totalCount} ชิ้น</h5>
+
+                {buyStep > 1 &&
+                  userLoginedCart.length > 0 &&
+                  userLoginedCart.map((product) => (
+                    <div className="overall_Item_product_Box">
+                      <img
+                        className="overall_Item_product_1"
+                        src={product.image_url}
+                        alt=""
+                      />
+                      <div className="overall_Item_product_2">
+                      <span >
+                        {product.name.slice(0, 20)}...
+                      </span>
+                      <span>จำนวน {product.count}</span>
+                      </div>
+
+                      <span className="overall_Item_product_3">
+                        ฿{formatMoney(product.price*product.count)}
+                      </span>
+                    </div>
+                  ))}
+
                 <div className="overall_Item_Box">
                   <span className="overall_Item_1">ราคาสินค้า</span>
                   <span className="overall_Item_2">
@@ -431,6 +444,7 @@ export default function Cart() {
                 </div>
               </div>
             </div>
+
             <div className="couponBox">
               <div className="d-flex align-items-center gap-3">
                 <RiCoupon2Line size={20} />

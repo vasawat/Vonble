@@ -1,4 +1,11 @@
+.PaymentPageSection{
+  margin: 3rem 0 15rem 0;
+}
 .payQRcode {
   width: 300px;
-  height: 400px;
+  height: 300px;
+  margin: 10px 0;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
 }

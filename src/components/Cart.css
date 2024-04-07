@@ -1,5 +1,5 @@
 .sectionCart {
-  margin: 0 0 10rem 0;
+  margin: 3rem 0 10rem 0;
 }
 .allCart_Box {
   display: flex;
@@ -71,11 +71,31 @@
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 400px;
+  height: auto;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
+}
+.overall_Item_product_Box{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.overall_Item_product_1{
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+.overall_Item_product_2{
+  display: grid;
+  width: 170px;
+  height: 50px;
+}
+.overall_Item_product_3{
+  margin-left: auto;
+  width: 70px;
+  height: 50px;
 }
 .overall_Item_Box {
   display: flex;
@@ -92,7 +112,7 @@
   margin-left: 20px;
 }
 .overall_Cart_bottom {
-  margin-top: auto;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
 }
