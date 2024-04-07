@@ -92,8 +92,9 @@ export default function SearchPage() {
               <div className="brandBox">
                 <p>แบรนด์</p>
                 {brands.map((brand) => (
-                  <div key={brand.id}>
+                  <div className="brandCheck_Box" key={brand.id}>
                     <input
+                      className="brandCheck_input"
                       type="checkbox"
                       id={brand.id}
                       onChange={(e) => {
@@ -108,7 +109,9 @@ export default function SearchPage() {
                         }
                       }}
                     />
-                    <label htmlFor={brand.id}>{brand.name}</label>
+                    <label className="brandCheck_label" htmlFor={brand.id}>
+                      {brand.name}
+                    </label>
                   </div>
                 ))}
               </div>

@@ -15,6 +15,18 @@
   padding: 20px;
   box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
+.brandBox{
+  margin-top: 10px;
+}
+.brandCheck_Box{
+  padding: 3px 0;
+}
+.brandCheck_input{
+  margin-right: 5px;
+}
+.brandCheck_label{
+
+}
 .productBox {
   width: 1200px;
 }
