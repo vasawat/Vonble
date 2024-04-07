@@ -98,7 +98,7 @@ export default function TransactionDetail() {
                         </td>
                         <td>{product.name}</td>
                         <td>{product.count} ชิ้น</td>
-                        <td>฿{formatMoney(product.price * product.count)}</td>
+                        <td>฿{formatMoney(parseInt(product.price * product.count))}</td>
                       </tr>
                     ))
                   : null}
@@ -118,7 +118,7 @@ export default function TransactionDetail() {
                   <td>ราคาสุทธิ</td>
                   <td></td>
                   <td></td>
-                  <td>฿{formatMoney(transactionDetail.grand_total)}</td>
+                  <td>฿{formatMoney(parseInt(transactionDetail.grand_total))}</td>
                 </tr>
               </tbody>
             </table>
