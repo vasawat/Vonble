@@ -1,10 +1,5 @@
 [[redirects]]
   from = "/*"
-  status = 200
-  to = "/.netlify/functions/render"
-
-  [[redirects]]
-  from = "/*"
   to = "https://vonble-backend.onrender.com"
   status = 200
   force = true # COMMENT: ensure that we always redirect
