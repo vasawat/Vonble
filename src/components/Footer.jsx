@@ -100,7 +100,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footer-item-3" style={{ fontSize: "12px" }}>
+      <div className="footer-item-3">
         © 2024 Vonble All Rights. | Terms & Conditions | Privacy Policy
       </div>
     </section>

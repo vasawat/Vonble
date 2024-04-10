@@ -7,7 +7,7 @@ export default function BestSale() {
   return (
     <section className="SectionBestSaleBox">
       <div className="allItem-Box">
-        <h2 className="text-center">🏆 Best Sale Top 5 🏆</h2>
+        <h2 className="text-center">🏆 Best Sale 🏆</h2>
         <div className="bestProductBox">
           <div className="number4">
             <div className="number text-center">4</div>

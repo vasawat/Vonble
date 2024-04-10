@@ -32,3 +32,36 @@ s {
   color: gray;
   margin-left: 3px;
 }
+
+@media screen and (max-width: 767px) {
+  .productCard {
+  width: 120px;
+  height: 182px;
+  font-size: 11px;
+  border: none;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.card-text {
+  display: flex;
+  align-items: center;
+}
+.card-title {
+  font-size: 11px;
+}
+.card-body{
+  padding: 8px;
+}
+.discount {
+  background-color: red;
+  color: white;
+  padding: 3px;
+  border-radius: 7px;
+  margin-right: 3px;
+  font-size: 9px;
+}
+s {
+  font-size: 9px;
+  color: gray;
+  margin-left: 3px;
+}
+}

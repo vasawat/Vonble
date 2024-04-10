@@ -83,19 +83,24 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand d-flex align-items-center" onClick={()=>window.scrollTo(0, 0)}>
+        <Link
+          to="/"
+          className="navbar-brand d-flex align-items-center"
+          onClick={() => window.scrollTo(0, 0)}
+        >
           <img className="vonbleLogoNav me-1" src={MjnVonbleLogo} alt="" />
           <span className="vonbleNavText">Vonble</span>
         </Link>
 
-        <form className="d-flex" role="search" onSubmit={toSearchPage}>
+        <form className="mySearchForm" role="search" onSubmit={toSearchPage}>
           <input
             id="reseachInput"
             className="form-control me-2"
             type="search"
             placeholder="ค้นหาสินค้า"
             onChange={(e) => SetSearch(e.target.value)}
-          required/>
+            required
+          />
           <button
             id="searchBtn"
             className="btn btn-outline-primary"
@@ -349,6 +354,8 @@ export default function Header() {
             setPassNotMatch(false);
           }}
         >
+          <Modal.Header closeButton>
+          </Modal.Header>
           <Modal.Body className="loginModal">
             <div>
               <img

@@ -31,7 +31,6 @@ useEffect(() => {
       <div className="allItem-Box">
         <div className="allItem-SectionCategoryBox">
           <div className="top-box">
-            
             <p className="category-name">{category.name}</p>
             <Link to={`/search/category/${categoryID}`}>
             <p className="button-seeAll">

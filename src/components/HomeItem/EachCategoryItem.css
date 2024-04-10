@@ -73,3 +73,23 @@
 .carousel-indicators {
   display: none;
 }
+
+@media screen and (max-width: 767px) {
+  p{
+    margin: 0;
+  }
+  .SectionCategoryBox {
+    margin: 30px 0 0 0;
+    width: 100%;
+  }
+  .carousel-box-category{
+    
+  }
+  .carousel-item-category{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .top-box {
+  padding: 5px 20px;
+}
+}

@@ -1,6 +1,5 @@
 .SectionCategoriesBox {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin: 40px 0;
 }
 .categoryImg {
   width: 80px;
@@ -15,4 +14,26 @@
 .ColBox {
   display: block;
   justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .SectionCategoriesBox {
+  margin: 10px 0 0 0;
+}
+.categoryImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+.categoryText {
+  margin-top: 5px;
+  font-size: 10px;
+  color: black;
+}
+.row .col:nth-child(6) {
+  display: none;
+}
+.row .col:nth-child(7) {
+  display: none;
+}
 }
