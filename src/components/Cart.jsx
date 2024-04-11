@@ -79,9 +79,9 @@ export default function Cart() {
   return (
     <section className="sectionCart">
       <div className="allItem-Box">
+        <h3 className="p-2">จัดการคำสั่งซื้อ</h3>
         <div className="allCart_Box">
           <div className="allCart_left">
-            <h3 className="p-2">จัดการคำสั่งซื้อ</h3>
             <div className="stepBox">
               <div
                 className={`stepButton step ${
@@ -158,11 +158,9 @@ export default function Cart() {
                                 <span>{eachAddress.phone_number}</span>
                               </header>
                               <div className="userAddressBoxContent">
-                                <span>{eachAddress.address}</span>/
-                                <span>{eachAddress.subdistrict}</span>/
-                                <span>{eachAddress.district}</span>/
-                                <span>{eachAddress.province}</span>/
-                                <span>{eachAddress.postal_code}</span>
+                                <span>
+                                  {eachAddress.address} / {eachAddress.subdistrict} / {eachAddress.district} / {eachAddress.province} / {eachAddress.postal_code}
+                                </span>
                               </div>
                             </div>
                             <div
@@ -258,11 +256,7 @@ export default function Cart() {
                           <span>{selectAddress.phone_number}</span>
                         </header>
                         <div className="userAddressBoxContent">
-                          <span>{selectAddress.address}</span>/
-                          <span>{selectAddress.subdistrict}</span>/
-                          <span>{selectAddress.district}</span>/
-                          <span>{selectAddress.province}</span>/
-                          <span>{selectAddress.postal_code}</span>
+                          <span>{selectAddress.address} / {selectAddress.subdistrict} / {selectAddress.district} / {selectAddress.province} / {selectAddress.postal_code}</span>
                         </div>
                       </div>
                     </div>
@@ -331,14 +325,12 @@ export default function Cart() {
                         alt=""
                       />
                       <div className="overall_Item_product_2">
-                      <span >
-                        {product.name.slice(0, 20)}...
-                      </span>
-                      <span>จำนวน {product.count}</span>
+                        <span>{product.name.slice(0, 20)}...</span>
+                        <span>จำนวน {product.count}</span>
                       </div>
 
                       <span className="overall_Item_product_3">
-                        ฿{formatMoney(product.price*product.count)}
+                        ฿{formatMoney(product.price * product.count)}
                       </span>
                     </div>
                   ))}

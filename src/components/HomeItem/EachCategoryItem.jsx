@@ -41,6 +41,7 @@ useEffect(() => {
           </div>
           <div className="bottom-box">
             <Carousel
+            className="eachCategoryCarousel"
               nextIcon={
                 <MdNavigateNext className="iconNext-carousel icon-box-size" />
               }

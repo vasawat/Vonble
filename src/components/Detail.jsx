@@ -470,7 +470,7 @@ export default function Detail() {
             <p>{productDetail.description}</p>
           </div>
           <div className="spac-box">
-            <h3>สเปคสินค้า</h3>
+            <h3 className="spec-text-head">สเปคสินค้า</h3>
             {Spec.length > 0 ? (
               <table>
                 <tbody>

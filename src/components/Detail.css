@@ -21,7 +21,6 @@
 .product-img-detail {
   width: 100%;
   height: 100%;
-
 }
 .img-selector-box {
   width: 80px;
@@ -143,4 +142,52 @@
 }
 .SpecTable tr:nth-child(even) {
   background-color: rgb(15, 99, 233, 0.15);
+}
+
+
+@media screen and (max-width: 767px) {
+  .Link-Box{
+    display: none;
+  }
+  .product-box{
+    display: block;
+  }
+  .left-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .img-selector-box{
+    display: none;
+  }
+  .product-img-detail-Box{
+    width: 400px;
+  height: 400px;
+  margin: 0px;
+}
+  .right-box{
+padding: 15px;
+  }
+  .detail-box{
+    padding: 15px;
+    font-size: 12px;
+  }
+.spac-box {
+  margin-top: 40px;
+  font-size: 12px;
+}
+.spec-text-head{
+  font-size: 20px;
+  padding: 10px 12px;
+}
+.spac-box td {
+  text-align: left;
+  padding: 10px 12px;
+}
+.spac-box td:nth-child(1) {
+  width: 30%;
+}
+.spac-box tr:nth-child(even) {
+  background-color: rgb(15, 99, 233, 0.15);
+}
 }

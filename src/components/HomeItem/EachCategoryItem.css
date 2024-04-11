@@ -73,6 +73,9 @@
 .carousel-indicators {
   display: none;
 }
+.eachCategoryCarousel{
+  width: auto;
+}
 
 @media screen and (max-width: 767px) {
   p{
@@ -91,5 +94,11 @@
   }
   .top-box {
   padding: 5px 20px;
+}
+.eachCategoryCarousel{
+  margin: 0;
+  padding: 0;
+  width: 450px;
+  overflow: hidden;
 }
 }

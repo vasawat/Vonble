@@ -1,4 +1,6 @@
 .carouselBox {
+}
+.carousel-inner {
 
 }
 .carouselImg {
@@ -8,6 +10,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .carouselBox{
+    width: 100%;
+  }
 .carouselImg {
   object-fit: cover;
   width: 100%;

@@ -1,11 +1,12 @@
 .navbar {
+  width: 100%;
+  z-index: 1000;
   padding: 25px 140px;
   transition: all 0.55s;
   background-color: white;
   position: sticky;
   top: 0;
-  z-index: 99;
-    box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
 }
 .navbar-brand {
   font-size: 35px;
@@ -19,10 +20,10 @@
 .userIconToggle {
   transition: all 0.55s;
 }
-.mySearchForm{
+.mySearchForm {
   display: flex;
 }
-.modal-header{
+.modal-header {
   display: none;
 }
 .vonbleNavText {
@@ -36,6 +37,7 @@
 }
 
 .userMenu {
+  z-index: 10;
   animation: fadeIn 0.55s ease-in-out;
 }
 @keyframes fadeIn {
@@ -210,31 +212,45 @@
   border: none;
   border-radius: 10px;
 }
+.navmobile {
+  z-index: 1;
+  display: none;
+}
 
 @media screen and (max-width: 767px) {
   .navbar {
     padding: 10px;
     position: relative;
+    box-shadow: none;
   }
-  .mySearchForm{
+  .navmobile {
+    display: block;
+  }
+  .mySearchForm {
     display: none;
   }
+  .mySearchFormMobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+  }
   .MyModal {
-  z-index: 9999;
-  width: 100%;
-  height: 100%;
-}
-.modal-header{
-  display: flex;
-  position: absolute;
-  z-index: 99999;
-  top: 15px;
-  right: 15px;
-}
-.navbar-nav{
-  flex-direction: row;
-}
-.gap-3{
-  gap: 0px !important;
-}
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-header {
+    display: flex;
+    position: absolute;
+    z-index: 9999;
+    top: 15px;
+    right: 15px;
+  }
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .gap-3 {
+    gap: 0px !important;
+  }
 }

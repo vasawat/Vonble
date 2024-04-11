@@ -15,3 +15,22 @@
   margin: 0 20px;
   width: 80px;
 }
+.cartProductNameMobile{
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .cartProductPrice{
+    margin: 0;
+  }
+  .quantity-Cart-button-box{
+    margin: 0 20px 0 0;
+    width: 100px;
+  }
+  .cartProductName{
+    display: none;
+  }
+  .cartProductNameMobile{
+    display: block;
+  }
+}

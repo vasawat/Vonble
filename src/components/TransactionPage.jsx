@@ -106,7 +106,7 @@ export default function TransactionPage() {
           <span>ค่าส่ง</span>
           <span>ราคาสุทธิ</span>
           <span>วัน/เวลาที่สั่ง</span>
-          <span>ดูรายละเอียด</span>
+          <span>รายละเอียด</span>
         </div>
         {whiceTransaction === 1 && (
           <div className="transactionBox">
@@ -148,7 +148,7 @@ export default function TransactionPage() {
               transactionPaid.map((item) => (
                 <div className="transactionItemBox">
                   <span className={`${item.order_status}`}>
-                    {item.order_status}
+                    {item.order_status === "PaymentReceived" && "ชำระเงินแล้ว"}
                   </span>
                   <span>{item.transaction_id}</span>
                   <span>{item.payment_method}</span>
@@ -175,7 +175,7 @@ export default function TransactionPage() {
               transactionUnpaid.map((item) => (
                 <div className="transactionItemBox">
                   <span className={`${item.order_status}`}>
-                    {item.order_status}
+                    {item.order_status === "PendingPayment" && "รอชำระเงิน"}
                   </span>
                   <span>{item.transaction_id}</span>
                   <span>{item.payment_method}</span>
@@ -202,7 +202,7 @@ export default function TransactionPage() {
               transactionCompleted.map((item) => (
                 <div className="transactionItemBox">
                   <span className={`${item.order_status}`}>
-                    {item.order_status}
+                    {item.order_status === "completed" && "สำเร็จ"}
                   </span>
                   <span>{item.transaction_id}</span>
                   <span>{item.payment_method}</span>
@@ -229,7 +229,7 @@ export default function TransactionPage() {
               transactionCancel.map((item) => (
                 <div className="transactionItemBox">
                   <span className={`${item.order_status}`}>
-                    {item.order_status}
+                    {item.order_status === "Cancelled" && "ยกเลิก"}
                   </span>
                   <span>{item.transaction_id}</span>
                   <span>{item.payment_method}</span>

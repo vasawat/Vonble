@@ -20,16 +20,15 @@ export default function UserPage() {
     findUserInfo();
     // eslint-disable-next-line
   }, []);
-    const { pathname } = useLocation();
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [pathname]);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <section className="userPageSection">
-      <div className="allItem-Box">
+      <div className="allItem-BoxUserPage">
         <div className="userInfoBox">
           <h3>Welcome to Vonble</h3>
-
 
           {userLoginedInfo.fname ? (
             <h3>
@@ -48,14 +47,14 @@ export default function UserPage() {
           )}
           {editInfo ? (
             <form
-              className="d-flex p-2"
+              className="p-2"
               onSubmit={handleSubmituserInfo((data) => {
                 EditUserInfo(data);
                 setEditInfo(false);
                 resetuserInfo();
               })}
             >
-              <div className="d-flex">
+              <div className="editInfoBox">
                 <div className="me-3">
                   <label for="fname" className="form-label">
                     Fristname :
@@ -75,13 +74,13 @@ export default function UserPage() {
                     {...userInfo("lname", { required: true })}
                   />
                 </div>
+                <input
+                  className="form-control userInfoInputSubmit ms-2"
+                  type="submit"
+                />
               </div>
-              <input
-                className="form-control userInfoInputSubmit ms-2"
-                type="submit"
-              />
             </form>
-          ) : null} 
+          ) : null}
           <h3>Email : {user_email}</h3>
         </div>
       </div>

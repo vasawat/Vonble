@@ -1,25 +1,24 @@
 .TransactionPageSection {
-margin: 3rem 0 15rem 0;
+  margin: 3rem 0 15rem 0;
 }
 .transactionBoxSelecter {
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    
+  display: flex;
+  gap: 20px;
+  padding: 10px;
 }
-.transactionBtn{
-    width: 150px;
-    padding: 7px 15px;
-    border: none;
-    background-color: white;
-    border-bottom: 4px solid transparent;
-    transition: all .55s;
+.transactionBtn {
+  width: 150px;
+  padding: 7px 15px;
+  border: none;
+  background-color: white;
+  border-bottom: 4px solid transparent;
+  transition: all 0.55s;
 }
-.transactionBtn:hover{
-    border-bottom: 4px solid rgba(13, 110, 253);
+.transactionBtn:hover {
+  border-bottom: 4px solid rgba(13, 110, 253);
 }
-.transactionBtnActive{
-    border-bottom: 4px solid rgba(13, 110, 253);
+.transactionBtnActive {
+  border-bottom: 4px solid rgba(13, 110, 253);
 }
 .transactionBox {
   padding: 0 10px;
@@ -90,15 +89,15 @@ margin: 3rem 0 15rem 0;
   background-color: rgb(233, 179, 19);
   color: white;
 }
-.PaymentReceived{
+.PaymentReceived {
   background-color: rgb(13, 110, 253);
   color: white;
 }
-.completed{
+.completed {
   background-color: rgb(25, 135, 84);
   color: white;
 }
-.Cancelled{
+.Cancelled {
   background-color: rgb(243, 32, 32);
   color: white;
 }
@@ -133,4 +132,93 @@ margin: 3rem 0 15rem 0;
 }
 .transactionItemBox > a:hover {
   box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 767px) {
+  .TransactionPageSection {
+    font-size: 10px;
+  }
+  .transactionBoxSelecter {
+    gap: 0;
+  }
+  .transactionBtn {
+    width: 150px;
+    padding: 5px 5px;
+  }
+  .PendingPayment {
+}
+.PaymentReceived {
+
+}
+.completed {
+
+}
+.Cancelled {
+
+}
+  .transactionHeadItemBox {
+    padding: 10px 5px;
+  }
+  .transactionHeadItemBox span:nth-child(3) {
+    display: none;
+  }
+  .transactionItemBox span:nth-child(3) {
+    display: none;
+  }
+  .transactionHeadItemBox span:nth-child(4) {
+    display: none;
+  }
+  .transactionItemBox span:nth-child(4) {
+    display: none;
+  }
+
+  .transactionHeadItemBox span {
+    font-size: 11px;
+  }
+  .transactionHeadItemBox > span:nth-child(1) {
+    width: 25%;
+    padding: 0px;
+  }
+  .transactionHeadItemBox > span:nth-child(2) {
+    width: 18%;
+    padding: 0px;
+  }
+  .transactionHeadItemBox > span:nth-child(5) {
+    width: 20%;
+    padding: 0px;
+  }
+  .transactionHeadItemBox > span:nth-child(6) {
+    width: 20%;
+    padding: 0px;
+  }
+  .transactionHeadItemBox > span:nth-child(7) {
+    width: 17%;
+    padding: 0px;
+  }
+
+  .transactionItemBox span,a {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+  }
+  .transactionItemBox > span:nth-child(1) {
+    width: 25%;
+    padding: 10px;
+  }
+  .transactionItemBox > span:nth-child(2) {
+    width: 20%;
+    padding: 10px;
+  }
+  .transactionItemBox > span:nth-child(5) {
+    width: 20%;
+    padding: 10px;
+  }
+  .transactionItemBox > span:nth-child(6) {
+    width: 20%;
+    padding: 10px;
+  }
+  .transactionItemBox > a {
+    width: 15%;
+    padding: 10px;
+  }
 }

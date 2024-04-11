@@ -77,22 +77,22 @@
   box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
-.overall_Item_product_Box{
+.overall_Item_product_Box {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
-.overall_Item_product_1{
+.overall_Item_product_1 {
   width: 60px;
   height: 60px;
   margin-right: 10px;
 }
-.overall_Item_product_2{
+.overall_Item_product_2 {
   display: grid;
   width: 170px;
   height: 50px;
 }
-.overall_Item_product_3{
+.overall_Item_product_3 {
   margin-left: auto;
   width: 70px;
   height: 50px;
@@ -138,12 +138,12 @@
   display: flex;
   gap: 20px;
 }
-.trash{
+.trash {
   margin-left: auto;
   transition: all 0.55s;
   cursor: pointer;
 }
-.trash:hover{
+.trash:hover {
   color: red;
 }
 .userAddressBoxHead {
@@ -162,4 +162,40 @@
   padding: 20px;
   gap: 20px;
   margin: 15px 0 20px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .allCart_Box {
+    display: flex;
+    flex-direction: column;
+  }
+  .stepBox {
+    display: none;
+  }
+  .allItem_Cart {
+    width: 100%;
+    padding: 0;
+  }
+  .allCart_left {
+    margin-top: 20px;
+  }
+  .userAddressBox {
+    width: 100%;
+    margin: 15px 0;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  .userAddressBoxContent {
+    display: flex;
+    gap: 0px;
+  }
+  .userAddressShowBox {
+    width: 100%;
+  }
+  .allCart_right {
+    order: -1;
+    font-size: 13px;
+    margin: 0;
+  }
 }
