@@ -21,7 +21,7 @@ export default function TransactionDetail() {
     // eslint-disable-next-line
   }, []);
   useEffect(() => {
-    setThisTransactionProduct(transactionDetail.cart_product);
+    setThisTransactionProduct(transactionDetail.products);
     setThisTransactionAddress(transactionDetail.address);
   }, [transactionDetail]);
   return (
@@ -96,8 +96,8 @@ export default function TransactionDetail() {
                           />
                         </td>
                         <td>{product.name}</td>
-                        <td>{product.count} ชิ้น</td>
-                        <td>฿{formatMoney(parseInt(product.price * product.count))}</td>
+                        <td>{product.quantity} ชิ้น</td>
+                        <td>฿{formatMoney(parseInt(product.price * product.quantity))}</td>
                       </tr>
                     ))
                   : null}

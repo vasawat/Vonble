@@ -14,7 +14,7 @@ export default function CartItem({ productsID, productCount }) {
   const [cartQuantityCount, setCartQuantityCount] = useState(productCount);
   useEffect(() => {
     for (let i = 0; i < products.length; i++) {
-      if (products[i].id === parseInt(productsID)) {
+      if (products[i]._id === productsID) {
         setThisProduct(products[i]);
       }
     }

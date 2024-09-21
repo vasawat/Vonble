@@ -25,7 +25,7 @@ export default function PaymentPage(params) {
           <div>
             <h5>ราคารวม : {testdata.grand_total} บาท</h5>
             <h5>จ่ายโดย : {testdata.payment_method}</h5>
-            <h5>สถานะ : ยังไม่ได้ชำระเงิน</h5>
+            <h5>สถานะ : {testdata.order_status}</h5>
           </div>
         )}
         {qrCode && <img className="payQRcode" src={qrCode} alt="" />}

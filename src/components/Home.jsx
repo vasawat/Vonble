@@ -10,12 +10,12 @@ export default function Home() {
       <Carousel />
       <CategoriesBox />
       <BestSale />
-      <EachCategoryItem categoryID={1} />
-      <EachCategoryItem categoryID={3} />
-      <EachCategoryItem categoryID={2} />
-      <EachCategoryItem categoryID={4} />
-      <EachCategoryItem categoryID={8} />
-      <EachCategoryItem categoryID={10} />
+      <EachCategoryItem categoryID={'66ecf73111e27f1ece284694'} />
+      <EachCategoryItem categoryID={'66ecfe9ba8a044b497cc9848'} />
+      <EachCategoryItem categoryID={'66ecfee2a8a044b497cc984b'} />
+      <EachCategoryItem categoryID={'66ecfef6a8a044b497cc984e'} />
+      <EachCategoryItem categoryID={'66ecff0ca8a044b497cc9851'} />
+      <EachCategoryItem categoryID={'66ecff20a8a044b497cc9854'} />
       <div className="scrolling-text-box">
         <div className="scrolling-text">
           <p className="text-scrolling">Welcome to Vonble.</p>

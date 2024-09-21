@@ -11,11 +11,11 @@ export default function CategoriesBox() {
         <Container>
           <Row>
             <Col>
-              <Link to={`/search/category/3`}>
+              <Link to={`/search/category/66ecff0ca8a044b497cc9851`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductNotebook4.png"
+                    src="https://iili.io/dPPNF3B.png"
                     alt=""
                   />
                   <p className="categoryText">โน๊ตบุ๊ค</p>
@@ -23,11 +23,11 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/1`}>
+              <Link to={`/search/category/66ecf73111e27f1ece284694`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductGamingMonitor3.png"
+                    src="https://iili.io/dPPwYLx.png"
                     alt=""
                   />
                   <p className="categoryText">จอคอม</p>
@@ -35,11 +35,11 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/2`}>
+              <Link to={`/search/category/66ecfef6a8a044b497cc984e`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductMouse4.png"
+                    src="https://iili.io/dPPNZMv.png"
                     alt=""
                   />
                   <p className="categoryText">เมาส์</p>
@@ -47,11 +47,11 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/4`}>
+              <Link to={`/search/category/66ecfee2a8a044b497cc984b`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductKeyboard4.png"
+                    src="https://iili.io/dPPN5vt.png"
                     alt=""
                   />
                   <p className="categoryText">คีย์บอร์ด</p>
@@ -59,11 +59,11 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/8`}>
+              <Link to={`/search/category/66ecfe9ba8a044b497cc9848`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductHeadphone1.png"
+                    src="https://iili.io/dPPwHgI.png"
                     alt=""
                   />
                   <p className="categoryText">หูฟัง</p>
@@ -71,11 +71,11 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/7`}>
+              <Link to={`/search/category/66ecff6da8a044b497cc9857`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductComputerItem2.png"
+                    src="https://iili.io/dPPhtP2.png"
                     alt=""
                   />
                   <p className="categoryText">จัดสเปคคอม</p>
@@ -87,7 +87,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductGamingChair2.png"
+                    src="https://iili.io/dPPwerN.png"
                     alt=""
                   />
                   <p className="categoryText">โต๊ะ & เก้าอี้</p>
@@ -95,11 +95,11 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/10`}>
+              <Link to={`/search/category/66ecff20a8a044b497cc9854`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://vasawatawsvonble.s3.amazonaws.com/MjnProductSmartWatch1.png"
+                    src="https://iili.io/dPPNNwu.png"
                     alt=""
                   />
                   <p className="categoryText">สมาร์ทแกดเจ็ต</p>

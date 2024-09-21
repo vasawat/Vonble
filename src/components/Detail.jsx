@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { productContext } from "../contexts/productContext";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import testimg from "./imgs/testimg.jpg";
+import testimg from "./imgs/testimage.png";
 import { MdNavigateNext } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
@@ -79,15 +79,18 @@ export default function Detail() {
     // eslint-disable-next-line
   }, [product_id]);
   useEffect(() => {
-    if (productDetail.id) {
+    if (productDetail._id) {
       setCurrentImageProduct(productDetail.image_url);
-      setSpec(Object.entries(productDetail.spec));
-      setFormData(productDetail.spec);
+      if (productDetail.spec !== undefined) {
+        setSpec(Object.entries(productDetail.spec));
+        setFormData(productDetail.spec);
+      }
+      
     }
   }, [productDetail]);
   return (
     <section className="DetailSection">
-      {productDetail.id && (
+      {productDetail._id && (
         <div className="allItem-Box">
           <div className="Link-Box">
             <p>
@@ -471,7 +474,7 @@ export default function Detail() {
           </div>
           <div className="spac-box">
             <h3 className="spec-text-head">สเปคสินค้า</h3>
-            {Spec.length > 0 ? (
+            {Spec.length > 0 && (
               <table>
                 <tbody>
                   {Spec.map(([key, value]) => (
@@ -482,7 +485,7 @@ export default function Detail() {
                   ))}
                 </tbody>
               </table>
-            ) : null}
+            )}
           </div>
         </div>
       )}

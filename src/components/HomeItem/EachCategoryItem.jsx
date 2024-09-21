@@ -20,7 +20,7 @@ useEffect(() => {
     }
   }
   for (let i = 0; i < categories.length; i++) {
-    if (categories[i].id === categoryID) {
+    if (categories[i]._id === categoryID) {
       setCategory(categories[i]);
     }
   }

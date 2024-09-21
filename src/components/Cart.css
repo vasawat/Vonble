@@ -1,5 +1,6 @@
 .sectionCart {
   margin: 3rem 0 10rem 0;
+  min-height: 700px;
 }
 .allCart_Box {
   display: flex;

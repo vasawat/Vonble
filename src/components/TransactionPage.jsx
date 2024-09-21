@@ -129,7 +129,7 @@ export default function TransactionPage() {
                   <span>฿{formatMoney(item.grand_total)}</span>
                   <span>{item.order_date}</span>
                   <Link
-                    to={`/user/${user_id}/transaction/${item.transaction_id}`}
+                    to={`/user/${user_id}/transaction/${item._id}`}
                   >
                     Detail
                   </Link>

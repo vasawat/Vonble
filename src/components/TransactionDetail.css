@@ -1,6 +1,7 @@
 .TransactionDetailSection {
   margin: 3rem 0 15rem 0;
   padding: 10px;
+  min-height: 700px;
 }
 .TransactionDetailBox {
   display: flex;

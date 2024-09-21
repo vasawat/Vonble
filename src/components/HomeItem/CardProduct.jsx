@@ -10,13 +10,13 @@ export default function CardProduct(props) {
     return null;
   }
   return (
-    <Link to={`/product/${product.category_id}/${product.id}`}>
+    <Link to={`/product/${product._id}`}>
       <Card className="productCard">
         <Card.Img className="card-img" variant="top" src={product.image_url} />
         <Card.Body>
           <Card.Title>
             <div className="card-title">
-              {product && product.name ? product.name.substring(0, 15) : ""}...
+              {product && product.name ? product.name.substring(0, 14) : ""}...
             </div>
           </Card.Title>
           <Card.Text>

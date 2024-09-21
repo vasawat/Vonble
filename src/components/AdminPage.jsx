@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "./AdminPage.css";
 import { useForm } from "react-hook-form";
 import { productContext } from "../contexts/productContext";
-import { IoIosInformationCircleOutline } from "react-icons/io";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 export default function AdminPage() {
   const {
@@ -25,6 +26,8 @@ export default function AdminPage() {
   const [sortUserLoginedTransaction, setSortUserLoginedTransaction] = useState(
     []
   );
+  const [selectCategory, setSelectCategory] = useState({});
+  const [selectBrand, setSelectBrand] = useState({});
   const [transactionPaid, setTransactionPaid] = useState([]);
   const [transactionUnpaid, setTransactionUnpaid] = useState([]);
   const [transactionCompleted, setTransactionCompleted] = useState([]);
@@ -172,7 +175,7 @@ export default function AdminPage() {
               <form
                 className="row g-3"
                 onSubmit={handleSubmitproduct((data) => {
-                  let newData = { ...data, spec: { ...formData } };
+                  let newData = { ...data, category_id: selectCategory, brand_id: selectBrand, spec: { ...formData } };
                   addProduct(newData);
                   resetproduct();
                   setFormData({});
@@ -235,27 +238,28 @@ export default function AdminPage() {
                   />
                 </div>
 
-                <div className="col-md-2">
-                  <label className="form-label d-flex align-items-center">
-                    <IoIosInformationCircleOutline classNameName="me-2" size={22} />
-                    CategoryID :
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...product("category_id", { required: true })}
+                <div className="col-md-2 w-full h-full flex align-items-end">
+                  <Autocomplete
+                    disablePortal
+                    options={categories}
+                    getOptionLabel={(option) => `${option.name}`}
+                    onChange={(event, newValue) => {
+                      setSelectCategory(newValue);
+                    }}
+                    sx={{  }}
+                    renderInput={(params) => <TextField {...params} label="Category" />}
                   />
                 </div>
                 <div className="col-md-2">
-                  <label className="form-label d-flex align-items-center">
-                    <IoIosInformationCircleOutline classNameName="me-2" size={22} />
-                    BrandID :
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...product("brand_id", { required: true })}
+                  <Autocomplete
+                    disablePortal
+                    options={brands}
+                    getOptionLabel={(option) => `${option.name}`}
+                    onChange={(event, newValue) => {
+                      setSelectBrand(newValue);
+                    }}
+                    sx={{  }}
+                    renderInput={(params) => <TextField {...params} label="Brand" />}
                   />
                 </div>
 
@@ -364,13 +368,11 @@ export default function AdminPage() {
                   </div>
                 </form>
                 <div>
-                  <span>ID</span>
                   <span className="ms-2">Name</span>
                 </div>
                 {categories.map((category, index) => (
                   <div key={index}>
                     <div>
-                      <span>{category.id}</span>
                       <span className="ms-2">{category.name}</span>
                       <span></span>
                     </div>
@@ -420,12 +422,10 @@ export default function AdminPage() {
                   </div>
                 </form>
                 <div>
-                  <span>ID</span>
                   <span className="ms-2">Name</span>
                 </div>
                 {brands.map((brand, index) => (
-                  <div className="p-1" key={index}>
-                    <span>{brand.id}</span>
+                  <div className="p-1" key={brand._id}>
                     <span className="ms-2">{brand.name}</span>
                     <span
                       className="btn btn-danger ms-2"
@@ -443,10 +443,10 @@ export default function AdminPage() {
                   {sortUserLoginedTransaction.length > 0 ? (
                     sortUserLoginedTransaction.map((item) => (
                       <div className="transactionItemBox">
-                        <span className={`${item.order_status}`}>
+                        <span className={`${item.order_status}`} style={{ minWidth: "150px" }}>
                           {item.order_status}
                         </span>
-                        <span>{item.transaction_id}</span>
+                        <span>{item._id}</span>
                         <span>{item.payment_method}</span>
                         <span>฿{item.shipping_fee}</span>
                         <span>฿{item.grand_total}</span>

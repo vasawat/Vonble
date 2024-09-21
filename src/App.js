@@ -34,7 +34,7 @@ function App() {
           ></Route>
           <Route path="/user/:user_id/cart" element={<Cart />}></Route>
           <Route
-            path="/product/:category_id/:product_id"
+            path="/product/:product_id"
             element={<Detail />}
           ></Route>
           <Route path="/search/:keywordSearch" element={<SearchPage />}></Route>

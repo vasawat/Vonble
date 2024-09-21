@@ -18,7 +18,6 @@ export default function Cart() {
     findUserAddress,
     userLoginedAddress,
     CreateTransaction,
-    userLoginedCartID,
     showOverlay,
     deleteAddress,
   } = useContext(productContext);
@@ -56,23 +55,27 @@ export default function Cart() {
   let totalCount = 0;
   userLoginedCart.length > 0 &&
     userLoginedCart.forEach((item) => {
-      totalAmount += item.count * item.price;
-      totalCount += item.count;
+      totalAmount += item.quantity * item.price;
+      totalCount += item.quantity;
     });
   useEffect(() => {
-    setSelectAddress(
-      userLoginedAddress.find(
-        (item) => parseInt(item.address_id) === parseInt(addressId)
-      )
-    );
+    if (addressId === null) {
+      setSelectAddress(
+        userLoginedAddress[0]
+      );
+    }else{
+      setSelectAddress(userLoginedAddress[addressId]);
+    }
+
+
     // eslint-disable-next-line
-  }, [addressId]);
+  }, [addressId, setAddressId]);
   useEffect(() => {
     findCart(user_id);
     setBuyStep(1);
     findUserAddress(user_id);
     setSelectAddress(
-      userLoginedAddress.find((item) => item.address_id === addressId)
+      userLoginedAddress[0]
     );
     // eslint-disable-next-line
   }, []);
@@ -111,9 +114,9 @@ export default function Cart() {
                 {userLoginedCart.length > 0 ? (
                   userLoginedCart.map((product) => (
                     <CartItem
-                      key={product.id}
-                      productsID={product.id}
-                      productCount={product.count}
+                      key={product.productId}
+                      productsID={product.productId}
+                      productCount={product.quantity}
                     />
                   ))
                 ) : (
@@ -135,7 +138,6 @@ export default function Cart() {
                     };
                     CreateShippingAddresss(newDataShipping);
                     resetaddress();
-                    findUserAddress(user_id);
                     // resetaddress();
                   })}
                   className="row g-3"
@@ -143,11 +145,11 @@ export default function Cart() {
                   <form>
                     {userLoginedAddress.length > 0 &&
                       userLoginedAddress.map((eachAddress, index) => (
-                        <div key={eachAddress.address_id} className="col-md-12">
+                        <div key={index} className="col-md-12">
                           <div className="userAddressBox">
                             <input
                               type="radio"
-                              value={eachAddress.address_id}
+                              value={index}
                               {...addressID("address_id")}
                               defaultChecked={index === 0}
                             />
@@ -166,7 +168,7 @@ export default function Cart() {
                             <div
                               className="d-flex align-items-center trash"
                               onClick={() => {
-                                deleteAddress(eachAddress.address_id);
+                                deleteAddress(index);
                               }}
                             >
                               <FaRegTrashAlt size={20} />
@@ -326,11 +328,11 @@ export default function Cart() {
                       />
                       <div className="overall_Item_product_2">
                         <span>{product.name.slice(0, 20)}...</span>
-                        <span>จำนวน {product.count}</span>
+                        <span>จำนวน {product.quantity}</span>
                       </div>
 
                       <span className="overall_Item_product_3">
-                        ฿{formatMoney(product.price * product.count)}
+                        ฿{formatMoney(product.price * product.quantity)}
                       </span>
                     </div>
                   ))}
@@ -415,10 +417,10 @@ export default function Cart() {
                       className="btn btn-success"
                       onClick={handleSubmitpayment((data) => {
                         let newDataTransaction = {
-                          cart_id: userLoginedCartID,
+                          user_id: user_id,
                           transactionOJ: {
                             user_id: selectAddress.user_id,
-                            address_id: selectAddress.address_id,
+                            address_index: addressId,
                             ...data,
                             total_price: totalAmount,
                             shipping_fee: 60,

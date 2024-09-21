@@ -53,42 +53,42 @@ export default function Footer() {
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://vasawatawsvonble.s3.amazonaws.com/facebook.png"
+                src="https://iili.io/dPPepTX.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://vasawatawsvonble.s3.amazonaws.com/instagram.png"
+                src="https://iili.io/dPPkA3Q.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://vasawatawsvonble.s3.amazonaws.com/line.png"
+                src="https://iili.io/dPPkG6v.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://vasawatawsvonble.s3.amazonaws.com/tiktok.png"
+                src="https://iili.io/dPPkUF4.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://vasawatawsvonble.s3.amazonaws.com/twitter.png"
+                src="https://iili.io/dPPktPj.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://vasawatawsvonble.s3.amazonaws.com/youtube.png"
+                src="https://iili.io/dPPvdDF.png"
                 alt=""
               />
             </Link>
