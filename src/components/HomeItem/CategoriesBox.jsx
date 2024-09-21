@@ -15,7 +15,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPNF3B.png"
+                    src="https://iili.io/dictnrF.png"
                     alt=""
                   />
                   <p className="categoryText">โน๊ตบุ๊ค</p>
@@ -27,7 +27,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPwYLx.png"
+                    src="https://iili.io/dicgmfj.png"
                     alt=""
                   />
                   <p className="categoryText">จอคอม</p>
@@ -39,7 +39,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPNZMv.png"
+                    src="https://iili.io/dilF2pI.png"
                     alt=""
                   />
                   <p className="categoryText">เมาส์</p>
@@ -51,7 +51,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPN5vt.png"
+                    src="https://iili.io/dildVTX.png"
                     alt=""
                   />
                   <p className="categoryText">คีย์บอร์ด</p>
@@ -63,7 +63,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPwHgI.png"
+                    src="https://iili.io/dicmwEN.png"
                     alt=""
                   />
                   <p className="categoryText">หูฟัง</p>
@@ -99,7 +99,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPNNwu.png"
+                    src="https://iili.io/dilBy5x.png"
                     alt=""
                   />
                   <p className="categoryText">สมาร์ทแกดเจ็ต</p>
