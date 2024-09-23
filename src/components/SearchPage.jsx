@@ -42,7 +42,7 @@ export default function SearchPage() {
             item.price >= minPrice &&
             item.price <= maxPrice &&
             item.quantity > 0 &&
-            brandFilter.includes(item.brand_id)
+            brandFilter.includes(item._id)
         )
       );
     } else {
