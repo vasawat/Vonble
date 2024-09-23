@@ -92,18 +92,18 @@ export default function SearchPage() {
               <div className="brandBox">
                 <p>แบรนด์</p>
                 {brands.map((brand) => (
-                  <div className="brandCheck_Box" key={brand.id}>
+                  <div className="brandCheck_Box" key={brand._id}>
                     <input
                       className="brandCheck_input"
                       type="checkbox"
-                      id={brand.id}
+                      id={brand._id}
                       onChange={(e) => {
                         const isChecked = e.target.checked;
                         if (isChecked) {
-                          setBrandFilter([...brandFilter, brand.id]);
+                          setBrandFilter([...brandFilter, brand._id]);
                         } else {
                           const updatedBrandFilter = brandFilter.filter(
-                            (id) => id !== brand.id
+                            (id) => id !== brand._id
                           );
                           setBrandFilter(updatedBrandFilter);
                         }
