@@ -6,8 +6,7 @@ import BestSale from "./HomeItem/BestSale";
 import EachCategoryItem from "./HomeItem/EachCategoryItem";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import productContext from "../context/productsContext";
-
+import { productContext } from "../contexts/productContext";
 export default function Home() {
   const { products } = useContext(productContext);
 
