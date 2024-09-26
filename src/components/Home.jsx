@@ -1,12 +1,40 @@
 import "./Home.css";
+import React, { useEffect, useState, useContext } from "react";
 import Carousel from "./HomeItem/Carousel";
 import CategoriesBox from "./HomeItem/CategoriesBox";
 import BestSale from "./HomeItem/BestSale";
 import EachCategoryItem from "./HomeItem/EachCategoryItem";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import productContext from "../context/productsContext";
 
 export default function Home() {
+  const { products } = useContext(productContext);
+
+  const [openMUIbackdrop, setOpenMUIbackdrop] = useState(true);
+  const handleCloseMUIbackdrop = () => {
+    setOpenMUIbackdrop(false);
+  };
+  const handleOpenMUIbackdrop = () => {
+    setOpenMUIbackdrop(true);
+  };
+
+  useEffect(() => {
+    if(products.length > 0){
+      handleCloseMUIbackdrop();
+    }else{
+      handleOpenMUIbackdrop();
+    }
+  },[products])
+
   return (
     <section className="HomeBox">
+      <Backdrop
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+        open={openMUIbackdrop}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Carousel />
       <CategoriesBox />
       <BestSale />

@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import enviroment from "../assets/environments/environment";
 
+
+
 export const productContext = createContext();
 
 export const ProductProvider = ({ children }) => {
@@ -29,6 +31,7 @@ export const ProductProvider = ({ children }) => {
   const [errorInLogin, setErrorInLogin] = useState("");
   const [errorInRegister, setErrorRegister] = useState("");
   const [passNotMatch, setPassNotMatch] = useState(false);
+
   const navigate = useNavigate();
   const handleLoginClose = () => {
     setShow(false);
