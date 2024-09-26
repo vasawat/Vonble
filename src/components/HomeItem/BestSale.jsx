@@ -12,7 +12,7 @@ export default function BestSale() {
           <div className="number4">
             <div className="number text-center">4</div>
             <CardProduct
-              product={products[0]}
+              product={products[5]}
             />
           </div>
           <div className="number2">

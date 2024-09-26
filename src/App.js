@@ -15,12 +15,14 @@ import PaymentPage from "./components/PaymentPage";
 import TransactionPage from "./components/TransactionPage";
 import TransactionDetail from "./components/TransactionDetail";
 
+
+
 function App() {
   return (
     <BrowserRouter>
       <ProductProvider>
         <Header />
-        <div class="overlay"></div>
+        <div className="overlay"></div>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/user/:user_email" element={<UserPage />}></Route>

@@ -83,7 +83,7 @@ export default function CategoriesBox() {
               </Link>
             </Col>
             <Col>
-              <Link to={`/search/category/9`}>
+              <Link to={`/search/category/66ecff20a8a044b497cc9854`}>
                 <div className="text-center">
                   <img
                     className="categoryImg"
