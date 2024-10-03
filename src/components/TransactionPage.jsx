@@ -119,7 +119,7 @@ export default function TransactionPage() {
                     {item.order_status === "completed" && "สำเร็จ"}
                     {item.order_status === "Cancelled" && "ยกเลิก"}
                   </span>
-                  <span>{item.transaction_id}</span>
+                  <span>{item._id}</span>
                   {item.payment_method === "cashondelivery" ? (
                     <span>ชำระเงินปลายทาง</span>
                   ) : (
@@ -150,13 +150,13 @@ export default function TransactionPage() {
                   <span className={`${item.order_status}`}>
                     {item.order_status === "PaymentReceived" && "ชำระเงินแล้ว"}
                   </span>
-                  <span>{item.transaction_id}</span>
+                  <span>{item._id}</span>
                   <span>{item.payment_method}</span>
                   <span>฿{item.shipping_fee}</span>
                   <span>฿{item.grand_total}</span>
                   <span>{item.order_date}</span>
                   <Link
-                    to={`/user/${user_id}/transaction/${item.transaction_id}`}
+                    to={`/user/${user_id}/transaction/${item._id}`}
                   >
                     Detail
                   </Link>
@@ -177,13 +177,13 @@ export default function TransactionPage() {
                   <span className={`${item.order_status}`}>
                     {item.order_status === "PendingPayment" && "รอชำระเงิน"}
                   </span>
-                  <span>{item.transaction_id}</span>
+                  <span>{item._id}</span>
                   <span>{item.payment_method}</span>
                   <span>฿{item.shipping_fee}</span>
                   <span>฿{item.grand_total}</span>
                   <span>{item.order_date}</span>
                   <Link
-                    to={`/user/${user_id}/transaction/${item.transaction_id}`}
+                    to={`/user/${user_id}/transaction/${item._id}`}
                   >
                     Detail
                   </Link>
@@ -204,13 +204,13 @@ export default function TransactionPage() {
                   <span className={`${item.order_status}`}>
                     {item.order_status === "completed" && "สำเร็จ"}
                   </span>
-                  <span>{item.transaction_id}</span>
+                  <span>{item._id}</span>
                   <span>{item.payment_method}</span>
                   <span>฿{item.shipping_fee}</span>
                   <span>฿{item.grand_total}</span>
                   <span>{item.order_date}</span>
                   <Link
-                    to={`/user/${user_id}/transaction/${item.transaction_id}`}
+                    to={`/user/${user_id}/transaction/${item._id}`}
                   >
                     Detail
                   </Link>
@@ -231,13 +231,13 @@ export default function TransactionPage() {
                   <span className={`${item.order_status}`}>
                     {item.order_status === "Cancelled" && "ยกเลิก"}
                   </span>
-                  <span>{item.transaction_id}</span>
+                  <span>{item._id}</span>
                   <span>{item.payment_method}</span>
                   <span>฿{item.shipping_fee}</span>
                   <span>฿{item.grand_total}</span>
                   <span>{item.order_date}</span>
                   <Link
-                    to={`/user/${user_id}/transaction/${item.transaction_id}`}
+                    to={`/user/${user_id}/transaction/${item._id}`}
                   >
                     Detail
                   </Link>
