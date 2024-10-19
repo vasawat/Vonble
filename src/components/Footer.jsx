@@ -53,42 +53,42 @@ export default function Footer() {
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://iili.io/dPPepTX.png"
+                src="/images/instagram.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://iili.io/dPPkA3Q.png"
+                src="/images/facebook.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://iili.io/dPPkG6v.png"
+                src="/images/twitter.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://iili.io/dPPkUF4.png"
+                src="/images/youtube.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://iili.io/dPPktPj.png"
+                src="/images/tiktok.png"
                 alt=""
               />
             </Link>
             <Link to="/" className="p-1">
               <img
                 className="socialMediaLogo"
-                src="https://iili.io/dPPvdDF.png"
+                src="/images/line.png"
                 alt=""
               />
             </Link>

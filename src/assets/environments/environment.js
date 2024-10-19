@@ -1,6 +1,6 @@
 const enviroment = {
-    // apiUrl: "http://localhost:5000",
-    apiUrl: "https://vonble-backend.onrender.com",
+    apiUrl: "http://localhost:5000",
+    // apiUrl: "https://vonble-backend.onrender.com",
 
 };
 

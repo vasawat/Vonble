@@ -15,7 +15,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dictnrF.png"
+                    src="https://iili.io/22UpOlf.png"
                     alt=""
                   />
                   <p className="categoryText">โน๊ตบุ๊ค</p>
@@ -27,7 +27,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dicgmfj.png"
+                    src="https://iili.io/22UpFt9.png"
                     alt=""
                   />
                   <p className="categoryText">จอคอม</p>
@@ -39,7 +39,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dilF2pI.png"
+                    src="https://iili.io/22UpMNI.png"
                     alt=""
                   />
                   <p className="categoryText">เมาส์</p>
@@ -51,7 +51,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dildVTX.png"
+                    src="https://iili.io/22UpAt1.png"
                     alt=""
                   />
                   <p className="categoryText">คีย์บอร์ด</p>
@@ -63,7 +63,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dicmwEN.png"
+                    src="https://iili.io/22Upocx.png"
                     alt=""
                   />
                   <p className="categoryText">หูฟัง</p>
@@ -75,7 +75,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPhtP2.png"
+                    src="https://iili.io/22UmUGa.png"
                     alt=""
                   />
                   <p className="categoryText">จัดสเปคคอม</p>
@@ -87,7 +87,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dPPwerN.png"
+                    src="https://iili.io/22UmDnn.png"
                     alt=""
                   />
                   <p className="categoryText">โต๊ะ & เก้าอี้</p>
@@ -99,7 +99,7 @@ export default function CategoriesBox() {
                 <div className="text-center">
                   <img
                     className="categoryImg"
-                    src="https://iili.io/dilBy5x.png"
+                    src="https://iili.io/22UpeS4.png"
                     alt=""
                   />
                   <p className="categoryText">สมาร์ทแกดเจ็ต</p>
