@@ -230,6 +230,7 @@ export const ProductProvider = ({ children }) => {
       });
   };
   const findProductDetail = async (id) => {
+    setProductDetail({});
     const data = { product_id: id };
     fetch(enviroment.apiUrl + "/data/productDetail", {
       method: "POST",
